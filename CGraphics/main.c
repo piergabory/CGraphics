@@ -16,71 +16,13 @@
 #include <unistd.h>
 
 #include "shaders.h"
+#include "window.h"
 
-GLchar* shaderSourceFile(char* path) {
-    FILE* stream = fopen(path, "r");
-    if (stream == NULL) {
-        printf("File error: Failed to load shader: %s\n", path);
-        return NULL;
-    }
-    fseek(stream, 0L, SEEK_END);
-    size_t size = ftell(stream) + 1;
-    if (size == 0) {
-        printf("File warning: empty shader source file: %s\n", path);
-    }
-    GLchar* source = (GLchar*)malloc(size * sizeof(GLchar));
-    rewind(stream);
-    fread(source, size, sizeof(char), stream);
-    source[size - 1] = '\0';
-    return source;
-}
-
-void printShaderCompileLog(GLuint shaderIdentifier) {
-    GLint length;
-    glGetShaderiv(shaderIdentifier, GL_INFO_LOG_LENGTH, &length);
-    char* log= malloc(length * sizeof(char));
-    glGetShaderInfoLog(shaderIdentifier, length, 0, log);
-    printf("%s\n", log);
-    free(log);
-}
 
 // Define main function
 int main()
 {
-    // start GL context and O/S window using the GLFW helper library
-    if (!glfwInit()) {
-      fprintf(stderr, "ERROR: could not start GLFW3\n");
-      return 1;
-    }
-
-    // uncomment these lines if on Apple OS X
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
-    if (!window) {
-      fprintf(stderr, "ERROR: could not open window with GLFW3\n");
-      glfwTerminate();
-      return 1;
-    }
-    glfwMakeContextCurrent(window);
-
-    // start GLEW extension handler
-    glewExperimental = GL_TRUE;
-    glewInit();
-
-    // get version info
-    const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
-    const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    printf("Renderer: %s\n", renderer);
-    printf("OpenGL version supported %s\n", version);
-
-    // tell GL to only draw onto a pixel if the shape is closer to the viewer
-    glEnable(GL_DEPTH_TEST); // enable depth-testing
-    glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
-
+    Window window = initContext();
 
     // Loading Shader
     ShaderProgram shader_program = shaderProgram("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");

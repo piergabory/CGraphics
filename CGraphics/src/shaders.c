@@ -20,13 +20,13 @@
 static GLchar* shaderSourceFile(char* path) {
     FILE* stream = fopen(path, "r");
     if (stream == NULL) {
-        printf("File error: Failed to load shader: %s\n", path);
+        fprintf(stderr, "File error: Failed to load shader: %s\n", path);
         return NULL;
     }
     fseek(stream, 0L, SEEK_END);
     size_t size = ftell(stream) + 1;
     if (size == 0) {
-        printf("File warning: empty shader source file: %s\n", path);
+        fprintf(stderr, "File warning: empty shader source file: %s\n", path);
     }
     GLchar* source = (GLchar*)malloc(size * sizeof(GLchar));
     rewind(stream);
@@ -47,7 +47,7 @@ static void printShaderCompileLog(Shader shader) {
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
     char* log= malloc(length * sizeof(char));
     glGetShaderInfoLog(shader, length, 0, log);
-    printf("%s\n", log);
+    fprintf(stderr, "%s\n", log);
     free(log);
 }
 
@@ -75,7 +75,7 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
     glCompileShader(shader);
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
     if (status != GL_TRUE) {
-        printf("Failed to compile shader: %s\n", "vertex_shader.glsl");
+        fprintf(stderr, "Failed to compile shader: %s\n", "vertex_shader.glsl");
         printShaderCompileLog(shader);
     }
     free((void *)source_code);
