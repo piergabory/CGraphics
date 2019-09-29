@@ -8,6 +8,15 @@
 
 #include "shaders.h"
 
+
+/**
+ * Shader source file
+ *
+ * Returns a string of all the content of a source code file
+ *
+ * @param path relative file path to the source code
+ * @return string content of the source code file
+ */
 static GLchar* shaderSourceFile(char* path) {
     FILE* stream = fopen(path, "r");
     if (stream == NULL) {
@@ -26,15 +35,37 @@ static GLchar* shaderSourceFile(char* path) {
     return source;
 }
 
-static void printShaderCompileLog(GLuint shaderIdentifier) {
+
+/**
+ * Print shader compile log
+ *
+ * Print out in  the standard output the compiling logs of the provided shader
+ * @param shader Compiled shader
+ */
+static void printShaderCompileLog(Shader shader) {
     GLint length;
-    glGetShaderiv(shaderIdentifier, GL_INFO_LOG_LENGTH, &length);
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
     char* log= malloc(length * sizeof(char));
-    glGetShaderInfoLog(shaderIdentifier, length, 0, log);
+    glGetShaderInfoLog(shader, length, 0, log);
     printf("%s\n", log);
     free(log);
 }
 
+
+/**
+ * Load shader
+ *
+ * Loads a shader from a file, and compiles it based on a provided type
+ * If the source code contains errors, the compilation log will be displayed in the standard output
+ * @see printShaderCompileLog
+ * @see shaderSourceFile
+ *
+ * @param shader_file relative path to the shader's source code
+ * @param shader_type GL enum value, either:
+ *  - GL_VERTEX_SHADER to compile a vertex shader
+ *  - GL_FRAGMENT_SHADER to compile a fragment shader
+ * @return compiled shader
+ */
 static Shader loadShader(char* shader_file, GLenum shader_type) {
     GLint status;
     GLuint shader = glCreateShader(shader_type);
@@ -51,6 +82,14 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
     return shader;
 }
 
+
+/**
+ * Shader Program
+ *
+ * @param vertex_shader_file  Path to the vertex shader source code.
+ * @param fragment_shader_file  Path to the fragment shader source code.
+ * @return compiled and linked shader program.
+ */
 ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file) {
     ShaderProgram shader_program = glCreateProgram();
     Shader vertex_shader = loadShader(vertex_shader_file, GL_VERTEX_SHADER);
@@ -62,6 +101,3 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
     return shader_program;
 }
-
-
-

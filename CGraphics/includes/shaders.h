@@ -19,6 +19,13 @@
 typedef GLuint Shader;
 typedef GLuint ShaderProgram;
 
+/**
+ * Shader Program
+ *
+ * @param vertex_shader_file  Path to the vertex shader source code.
+ * @param fragment_shader_file  Path to the fragment shader source code.
+ * @return compiled and linked shader program.
+ */
 ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file);
 
 // TODO: Error handling
