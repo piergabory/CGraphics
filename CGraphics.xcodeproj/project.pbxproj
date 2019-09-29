@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D42B418823402F35005F6C76 /* shaders.c in Sources */ = {isa = PBXBuildFile; fileRef = D42B418723402F35005F6C76 /* shaders.c */; };
 		D4565E07234007390093C4BB /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E06234007390093C4BB /* libglfw.3.3.dylib */; };
 		D4565E09234007900093C4BB /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */; };
 		D4565E0E23400BDD0093C4BB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E0D23400BDD0093C4BB /* Cocoa.framework */; };
@@ -27,14 +28,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D42B418623402F35005F6C76 /* shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
+		D42B418723402F35005F6C76 /* shaders.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shaders.c; sourceTree = "<group>"; };
 		D4565E06234007390093C4BB /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		D4565E0D23400BDD0093C4BB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D48E2769233ED64B007B8FB5 /* CGraphics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGraphics; sourceTree = BUILT_PRODUCTS_DIR; };
-		D48E276C233ED64B007B8FB5 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D48E276C233ED64B007B8FB5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = main.c; sourceTree = "<group>"; };
 		D4D6F79A233EE13900C4BE47 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vertex_shader.glsl; sourceTree = "<group>"; };
-		D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fragment_shader.glsl; sourceTree = "<group>"; };
+		D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = vertex_shader.glsl; sourceTree = "<group>"; };
+		D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = fragment_shader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +55,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D42B418323402E87005F6C76 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */,
+				D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		D42B418423402EC4005F6C76 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D42B418723402F35005F6C76 /* shaders.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D42B418523402ECA005F6C76 /* includes */ = {
+			isa = PBXGroup;
+			children = (
+				D42B418623402F35005F6C76 /* shaders.h */,
+			);
+			path = includes;
+			sourceTree = "<group>";
+		};
 		D48E2760233ED64B007B8FB5 = {
 			isa = PBXGroup;
 			children = (
@@ -72,9 +100,10 @@
 		D48E276B233ED64B007B8FB5 /* CGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				D42B418523402ECA005F6C76 /* includes */,
+				D42B418423402EC4005F6C76 /* src */,
 				D48E276C233ED64B007B8FB5 /* main.c */,
-				D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */,
-				D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */,
+				D42B418323402E87005F6C76 /* shaders */,
 			);
 			path = CGraphics;
 			sourceTree = "<group>";
@@ -147,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D42B418823402F35005F6C76 /* shaders.c in Sources */,
 				D48E276D233ED64B007B8FB5 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
