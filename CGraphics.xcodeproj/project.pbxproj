@@ -13,6 +13,7 @@
 		D4565E0E23400BDD0093C4BB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E0D23400BDD0093C4BB /* Cocoa.framework */; };
 		D48E276D233ED64B007B8FB5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D48E276C233ED64B007B8FB5 /* main.c */; };
 		D4C4661523403A0300165730 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = D4C4661423403A0300165730 /* window.c */; };
+		D4C4661823403C2C00165730 /* mesh.c in Sources */ = {isa = PBXBuildFile; fileRef = D4C4661723403C2C00165730 /* mesh.c */; };
 		D4EB120E233EFBEC009F088A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4D6F79A233EE13900C4BE47 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,8 @@
 		D48E276C233ED64B007B8FB5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = main.c; sourceTree = "<group>"; };
 		D4C4661323403A0300165730 /* window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
 		D4C4661423403A0300165730 /* window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
+		D4C4661623403C2C00165730 /* mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		D4C4661723403C2C00165730 /* mesh.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mesh.c; sourceTree = "<group>"; };
 		D4D6F79A233EE13900C4BE47 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = vertex_shader.glsl; sourceTree = "<group>"; };
 		D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = fragment_shader.glsl; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 			children = (
 				D4C4661423403A0300165730 /* window.c */,
 				D42B418723402F35005F6C76 /* shaders.c */,
+				D4C4661723403C2C00165730 /* mesh.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -81,6 +85,7 @@
 			children = (
 				D4C4661323403A0300165730 /* window.h */,
 				D42B418623402F35005F6C76 /* shaders.h */,
+				D4C4661623403C2C00165730 /* mesh.h */,
 			);
 			path = includes;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C4661823403C2C00165730 /* mesh.c in Sources */,
 				D4C4661523403A0300165730 /* window.c in Sources */,
 				D42B418823402F35005F6C76 /* shaders.c in Sources */,
 				D48E276D233ED64B007B8FB5 /* main.c in Sources */,
