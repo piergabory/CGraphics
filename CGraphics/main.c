@@ -13,7 +13,7 @@
 
 #include "shaders.h"
 #include "window.h"
-#include "mesh.h"
+#include "object.h"
 
 // Define main function
 int main()

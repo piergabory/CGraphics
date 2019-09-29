@@ -19,6 +19,14 @@ typedef GLuint Shader;
 typedef GLuint ShaderProgram;
 
 /**
+ * Shader Attributes
+ */
+enum ShaderAttributes {
+    VERTEX_ATTRIBUTE_POSITION,
+    COLOR_ATTRIBUTE_POSITION
+};
+
+/**
  * Shader Program
  *
  * @param vertex_shader_file  Path to the vertex shader source code.
