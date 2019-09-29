@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "shaders.h"
+
 GLchar* shaderSourceFile(char* path) {
     FILE* stream = fopen(path, "r");
     if (stream == NULL) {
@@ -81,40 +83,7 @@ int main()
 
 
     // Loading Shader
-
-    GLint status;
-
-    GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    const GLchar *vertex_shader_source = shaderSourceFile("shaders/vertex_shader.glsl");
-    glShaderSource(vertex_shader, 1, &vertex_shader_source, NULL);
-    glCompileShader(vertex_shader);
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &status);
-    if (status != GL_TRUE) {
-        printf("Failed to compile shader: %s\n", "vertex_shader.glsl");
-        printShaderCompileLog(vertex_shader);
-    }
-    free((void *)vertex_shader_source);
-
-
-    GLuint fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    const GLchar *fragment_shader_source = shaderSourceFile("shaders/fragment_shader.glsl");
-    glShaderSource(fragment_shader, 1, &fragment_shader_source, NULL);
-    glCompileShader(fragment_shader);
-    glGetShaderiv(vertex_shader, GL_COMPILE_STATUS, &status);
-    if (status != GL_TRUE) {
-        printf("Failed to compile shader: %s\n", "fragment_shader.glsl");
-        printShaderCompileLog(fragment_shader);
-    }
-    free((void *)fragment_shader_source);
-
-
-    // Compile shader program
-
-    GLuint shader_programme = glCreateProgram();
-    glAttachShader(shader_programme, fragment_shader);
-    glAttachShader(shader_programme, vertex_shader);
-    glLinkProgram(shader_programme);
-
+    ShaderProgram shader_program = shaderProgram("shaders/vertex_shader.glsl", "shaders/fragment_shader.glsl");
 
     // Load Vertices
 
@@ -150,7 +119,7 @@ int main()
 
         // Clear the screen to black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(shader_programme);
+        glUseProgram(shader_program);
         glBindVertexArray(vao);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
