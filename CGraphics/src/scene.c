@@ -11,6 +11,7 @@
 Scene createScene() {
     Scene newScene;
     newScene.root = NULL;
+    newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(70.0f), 1.0f, 0.1f, 100.0f);
     return newScene;
 }
 
@@ -27,6 +28,7 @@ Instance* createInstance(Object* model) {
     }
 
     newInstance->model = model;
+    newInstance->model_view = GLKMatrix4Identity;
     newInstance->next = NULL;
 
     return newInstance;
@@ -53,6 +55,7 @@ void drawScene(Scene scene) {
     Instance* head = scene.root;
     while (head != NULL) {
         bindObject(*head->model);
+        updateUniforms(head->model->material, head->model_view, scene.camera);
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;
     }

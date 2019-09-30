@@ -10,5 +10,5 @@ out vec3 vertex_colour;
 
 void main() {
     vertex_colour = vertex_colour_attribute;
-    gl_Position = /**model_view_projection_matrix_uniform **/ vec4(vertex_position_attribute, 1);
+    gl_Position = model_view_projection_matrix_uniform * vec4(vertex_position_attribute, 1);
 }

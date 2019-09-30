@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glew.h>
+#include <GLKit/GLKMath.h>
 
 #define SHADER_DIR "shaders/"
 
@@ -42,5 +43,7 @@ enum ShaderAttributes {
 ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file);
 
 // TODO: Error handling
+
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection); 
 
 #endif /* shaders_h */

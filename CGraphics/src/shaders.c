@@ -91,6 +91,14 @@ static void linkProgram(GLuint programId, Shader vertex_shader, Shader fragment_
 }
 
 
+/// TODO: Doc
+static void mapUniforms(ShaderProgram* program) {
+    program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id,"model_view_projection_matrix_uniform");
+    program->uniform_model_view_matrix = glGetUniformLocation(program->id,"model_view_matrix_uniform");
+    program->uniform_normal_matrix = glGetUniformLocation(program->id, "normal_matrix_uniform");
+}
+
+
 /**
  * Shader Program
  *
@@ -105,6 +113,16 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
     Shader vertex_shader = loadShader(vertex_shader_file, GL_VERTEX_SHADER);
     Shader fragment_shader = loadShader(fragment_shader_file, GL_FRAGMENT_SHADER);
     linkProgram(shader_program.id, vertex_shader, fragment_shader);
+    mapUniforms(&shader_program);
 
     return shader_program;
+}
+
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection) {
+    GLKMatrix4 model_view_projection = GLKMatrix4Multiply(model_view, projection);
+
+    glUseProgram(program.id);
+    glUniformMatrix4fv(program.uniform_model_view_projection_matrix, 1, GL_TRUE, model_view_projection.m);
+    glUniformMatrix4fv(program.uniform_model_view_matrix, 1, GL_TRUE, model_view.m);
+    glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_FALSE, model_view.m);
 }
