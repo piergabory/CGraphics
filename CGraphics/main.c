@@ -22,9 +22,9 @@ int main()
     Scene scene = createScene();
 
     GLfloat vertices[] = {
-        -0.5f, -0.5f,  -1.f,     1.0f, 0.0f, 0.0f,
-         0.5f, -0.5f,  -1.f,     0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f,  -1.f,     0.0f, 0.0f, 1.0f
+        -0.5f, -0.5f,  0.0f,     1.0f, 0.0f, 0.0f,
+         0.5f, -0.5f,  0.0f,     0.0f, 1.0f, 0.0f,
+         0.0f,  0.5f,  0.0f,     0.0f, 0.0f, 1.0f
     };
     Mesh triangle_mesh = createMesh(vertices, 3, 3, 3);
 
@@ -35,12 +35,17 @@ int main()
 
     Object triangle = createObject(triangle_mesh, shader_program);
 
-    addObjectToScene(&triangle, &scene);
+    Instance* triangle_instance = addObjectToScene(&triangle, &scene);
+    triangle_instance->model_view = GLKMatrix4Translate(triangle_instance->model_view, 0, 0, -2);
     
 
     // Event loop
     while(!glfwWindowShouldClose(window))
     {
+        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.002, 0, 1, 0);
+        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.001, 0, 0, 1);
+        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.0002, 1, 0, 0);
+
         // Clear the screen to black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         drawScene(scene);

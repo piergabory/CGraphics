@@ -11,7 +11,7 @@
 Scene createScene() {
     Scene newScene;
     newScene.root = NULL;
-    newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(70.0f), 1.0f, 0.1f, 100.0f);
+    newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90.0f), 1.0f, 1.0f, 100.0f);
     return newScene;
 }
 
@@ -40,15 +40,17 @@ void deleteInstance(Instance* instance) {
     free(instance);
 }
 
-void addObjectToScene(Object* model, Scene* scene) {
+Instance* addObjectToScene(Object* model, Scene* scene) {
     // try to allocate instance
     Instance* newInstance = createInstance(model);
-    if (!newInstance) return;
+    if (!newInstance) return NULL;
 
     // push to the instance list on success
     Instance* head = scene->root;
     scene->root = newInstance;
     scene->root->next = head;
+    
+    return newInstance;
 }
 
 void drawScene(Scene scene) {

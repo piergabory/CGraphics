@@ -41,7 +41,7 @@ Instance* createInstance(Object* model);
 
 void deleteInstance(Instance* instance);
 
-void addObjectToScene(Object* model, Scene* scene);
+Instance* addObjectToScene(Object* model, Scene* scene);
 
 void drawScene(Scene scene);
 
