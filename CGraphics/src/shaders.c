@@ -83,6 +83,14 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
 }
 
 
+/// TODO: Doc
+static void linkProgram(GLuint programId, Shader vertex_shader, Shader fragment_shader) {
+    glAttachShader(programId, vertex_shader);
+    glAttachShader(programId, fragment_shader);
+    glLinkProgram(programId);
+}
+
+
 /**
  * Shader Program
  *
@@ -91,13 +99,12 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
  * @return compiled and linked shader program.
  */
 ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file) {
-    ShaderProgram shader_program = glCreateProgram();
+    ShaderProgram shader_program;
+    shader_program.id = glCreateProgram();
+
     Shader vertex_shader = loadShader(vertex_shader_file, GL_VERTEX_SHADER);
     Shader fragment_shader = loadShader(fragment_shader_file, GL_FRAGMENT_SHADER);
-
-    glAttachShader(shader_program, vertex_shader);
-    glAttachShader(shader_program, fragment_shader);
-    glLinkProgram(shader_program);
+    linkProgram(shader_program.id, vertex_shader, fragment_shader);
 
     return shader_program;
 }

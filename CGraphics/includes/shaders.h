@@ -16,7 +16,13 @@
 #define SHADER_DIR "shaders/"
 
 typedef GLuint Shader;
-typedef GLuint ShaderProgram;
+
+typedef struct ShaderProgram {
+    GLuint id;
+    GLuint uniform_model_view_projection_matrix;
+    GLuint uniform_model_view_matrix;
+    GLuint uniform_normal_matrix;
+} ShaderProgram;
 
 /**
  * Shader Attributes

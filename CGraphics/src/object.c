@@ -89,7 +89,7 @@ Object createObject(Mesh shape, ShaderProgram material) {
  */
 void bindObject(Object object) {
     glBindVertexArray(object.vao);
-    glUseProgram(object.material);
+    glUseProgram(object.material.id);
 }
 
 
