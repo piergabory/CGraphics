@@ -120,9 +120,10 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
 void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection) {
     GLKMatrix4 model_view_projection = GLKMatrix4Multiply(projection, model_view);
+    GLKMatrix4 normal = GLKMatrix4Invert(model_view, NULL);
 
     glUseProgram(program.id);
     glUniformMatrix4fv(program.uniform_model_view_projection_matrix, 1, GL_FALSE, model_view_projection.m);
     glUniformMatrix4fv(program.uniform_model_view_matrix, 1, GL_FALSE, model_view.m);
-    glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, model_view.m);
+    glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, normal.m);
 }

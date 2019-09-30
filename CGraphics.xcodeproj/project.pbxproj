@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D42B418823402F35005F6C76 /* shaders.c in Sources */ = {isa = PBXBuildFile; fileRef = D42B418723402F35005F6C76 /* shaders.c */; };
+		D43A985623426D6B0059E3AA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43A985523426D6B0059E3AA /* GLKit.framework */; };
 		D4565E07234007390093C4BB /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E06234007390093C4BB /* libglfw.3.3.dylib */; };
 		D4565E09234007900093C4BB /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */; };
 		D4565E0E23400BDD0093C4BB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E0D23400BDD0093C4BB /* Cocoa.framework */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		D42B418623402F35005F6C76 /* shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
 		D42B418723402F35005F6C76 /* shaders.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shaders.c; sourceTree = "<group>"; };
+		D43A985523426D6B0059E3AA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		D4565E06234007390093C4BB /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		D4565E0D23400BDD0093C4BB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -58,6 +60,7 @@
 				D4565E09234007900093C4BB /* libGLEW.2.1.0.dylib in Frameworks */,
 				D4565E0E23400BDD0093C4BB /* Cocoa.framework in Frameworks */,
 				D4EB120E233EFBEC009F088A /* OpenGL.framework in Frameworks */,
+				D43A985623426D6B0059E3AA /* GLKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +129,7 @@
 		D4D6F799233EE13900C4BE47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D43A985523426D6B0059E3AA /* GLKit.framework */,
 				D4565E0D23400BDD0093C4BB /* Cocoa.framework */,
 				D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */,
 				D4565E06234007390093C4BB /* libglfw.3.3.dylib */,

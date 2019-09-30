@@ -44,6 +44,8 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
 // TODO: Error handling
 
+//GLKMatrix4 GLKMatrix4Invert(GLKMatrix4 matrix, void* invertible);
+
 void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection); 
 
 #endif /* shaders_h */
