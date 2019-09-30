@@ -6,5 +6,5 @@ in vec3 vertex_normal;
 out vec3 fragment_colour;
 
 void main() {
-    fragment_colour = vertex_normal;
+    fragment_colour = (vertex_normal + vec3(1)) / 2;
 }
