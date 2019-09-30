@@ -21,6 +21,7 @@
 typedef struct Object {
     GLuint vbo;
     GLuint vao;
+    GLsizei vertices_count;
     ShaderProgram material;
 } Object;
 
@@ -30,7 +31,7 @@ typedef struct Object {
  * Array of floats representing a 3D shape
  */
 typedef struct Mesh {
-    size_t size;
+    GLsizei size;
     unsigned int point_size;
     unsigned int color_size;
     GLfloat* vertices;
@@ -44,7 +45,7 @@ typedef struct Mesh {
  * @param point_size number of floats per vertex defining the position
  * @param color_size number of floats per vertex defining the color
  */
-Mesh createMesh(float* vertices, size_t count, unsigned int point_size, unsigned int color_size);
+Mesh createMesh(GLfloat* vertices, GLsizei count, GLsizei point_size, GLsizei color_size);
 
 /**
  * Create Object
@@ -58,7 +59,7 @@ Object createObject(Mesh shape, ShaderProgram material);
  * Draw Object
  * Renders the object.
  */
-void drawObject(Object object);
+void bindObject(Object object);
 
 /**
  * Delete Object

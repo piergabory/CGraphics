@@ -11,14 +11,15 @@
 
 #include <unistd.h>
 
-#include "shaders.h"
 #include "window.h"
-#include "object.h"
+#include "scene.h"
+
 
 // Define main function
 int main()
 {
     Window window = initContext();
+    Scene scene = createScene();
 
     GLfloat vertices[] = {
         -0.5f, -0.5f,  0.0f,     1.0f, 0.0f, 0.0f,
@@ -34,21 +35,23 @@ int main()
 
     Object triangle = createObject(triangle_mesh, shader_program);
 
+    addObjectToScene(&triangle, &scene);
+    
+
     // Event loop
     while(!glfwWindowShouldClose(window))
     {
         // Clear the screen to black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        drawObject(triangle);
-        sleep(1.0/30.0);
-
+        drawScene(scene);
         glfwPollEvents();
         glfwSwapBuffers(window);
+        sleep(1.0/30.0);
     }
 
     
     deleteObject(triangle);
+    deleteScene(scene);
 
     // Terminate GLFW
     glfwTerminate(); return 0;

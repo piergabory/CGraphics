@@ -21,6 +21,28 @@ static GLuint createVertexBufferFromMesh(Mesh mesh) {
 }
 
 
+// Gen VBA from mesh
+// Requires binded VBO
+static GLuint createVertexArrayFromMesh(Mesh mesh) {
+    GLuint vertex_array_object;
+    GLsizei vertex_size = (mesh.point_size + mesh.color_size) * sizeof(GLfloat);
+    void* color_bytes_offset = (void*)( mesh.point_size * sizeof(GLfloat));
+
+    glGenVertexArrays(1, &vertex_array_object);
+    glBindVertexArray(vertex_array_object);
+
+    // Vertices Positions
+    glEnableVertexAttribArray(VERTEX_ATTRIBUTE_POSITION);
+    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, mesh.point_size, GL_FLOAT, GL_FALSE, vertex_size, 0);
+
+    // Vertices Colors
+    glEnableVertexAttribArray(COLOR_ATTRIBUTE_POSITION);
+    glVertexAttribPointer(COLOR_ATTRIBUTE_POSITION,  mesh.color_size, GL_FLOAT, GL_FALSE, vertex_size, color_bytes_offset);
+
+    return vertex_array_object;
+}
+
+
 /**
  * Create Mesh
  * @param vertices floating point values data array
@@ -28,7 +50,7 @@ static GLuint createVertexBufferFromMesh(Mesh mesh) {
  * @param point_size number of floats per vertex defining the position
  * @param color_size number of floats per vertex defining the color
  */
-Mesh createMesh(float* vertices, size_t count, unsigned int point_size, unsigned int color_size) {
+Mesh createMesh(GLfloat* vertices, GLsizei count, GLsizei point_size, GLsizei color_size) {
     Mesh mesh;
     mesh.vertices = vertices;
     mesh.size = count;
@@ -47,22 +69,15 @@ Mesh createMesh(float* vertices, size_t count, unsigned int point_size, unsigned
  */
 Object createObject(Mesh shape, ShaderProgram material) {
     Object object;
-    glGenVertexArrays(1, &object.vao);
-    glBindVertexArray(object.vao);
 
-    glEnableVertexAttribArray(VERTEX_ATTRIBUTE_POSITION);
-    glEnableVertexAttribArray(COLOR_ATTRIBUTE_POSITION);
-
+    // VBO and VAO
     object.vbo = createVertexBufferFromMesh(shape);
-    glBindBuffer(GL_ARRAY_BUFFER, object.vbo);
+    glBindVertexArray(object.vbo);
+    object.vao = createVertexArrayFromMesh(shape);
 
-    GLsizei vertexSize = (shape.point_size + shape.color_size) * sizeof(GLfloat);
-    void* colorByteOffset = (void*)( shape.point_size * sizeof(GLfloat));
-    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, shape.point_size, GL_FLOAT, GL_FALSE, vertexSize, 0);
-    glVertexAttribPointer(COLOR_ATTRIBUTE_POSITION,  shape.color_size, GL_FLOAT, GL_FALSE, vertexSize, colorByteOffset);
-
-
+    //
     object.material = material;
+    object.vertices_count = shape.size;
 
     return object;
 }
@@ -72,9 +87,8 @@ Object createObject(Mesh shape, ShaderProgram material) {
  * Draw Object
  * Renders the object.
  */
-void drawObject(Object object) {
+void bindObject(Object object) {
     glBindVertexArray(object.vao);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
     glUseProgram(object.material);
 }
 
