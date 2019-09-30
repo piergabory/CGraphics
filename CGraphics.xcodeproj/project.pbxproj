@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D42B418823402F35005F6C76 /* shaders.c in Sources */ = {isa = PBXBuildFile; fileRef = D42B418723402F35005F6C76 /* shaders.c */; };
+		D42C682E23427F730087D386 /* loader.c in Sources */ = {isa = PBXBuildFile; fileRef = D42C682D23427F730087D386 /* loader.c */; };
 		D43A985623426D6B0059E3AA /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D43A985523426D6B0059E3AA /* GLKit.framework */; };
 		D4565E07234007390093C4BB /* libglfw.3.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E06234007390093C4BB /* libglfw.3.3.dylib */; };
 		D4565E09234007900093C4BB /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */; };
@@ -34,6 +35,12 @@
 /* Begin PBXFileReference section */
 		D42B418623402F35005F6C76 /* shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
 		D42B418723402F35005F6C76 /* shaders.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shaders.c; sourceTree = "<group>"; };
+		D42C682A23427C310087D386 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
+		D42C682B23427C700087D386 /* tinyobj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyobj.h; sourceTree = "<group>"; };
+		D42C682C23427F5E0087D386 /* loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loader.h; sourceTree = "<group>"; };
+		D42C682D23427F730087D386 /* loader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = loader.c; sourceTree = "<group>"; };
+		D42C682F234293AF0087D386 /* cornellbox.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cornellbox.obj; sourceTree = "<group>"; };
+		D42C6830234294000087D386 /* cornellbox.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = cornellbox.mtl; sourceTree = "<group>"; };
 		D43A985523426D6B0059E3AA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		D4565E06234007390093C4BB /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
@@ -82,6 +89,7 @@
 				D4F282492341B99800CB6B1B /* scene.c */,
 				D4C4661423403A0300165730 /* window.c */,
 				D42B418723402F35005F6C76 /* shaders.c */,
+				D42C682D23427F730087D386 /* loader.c */,
 				D4C4661723403C2C00165730 /* object.c */,
 			);
 			path = src;
@@ -94,8 +102,20 @@
 				D4C4661323403A0300165730 /* window.h */,
 				D42B418623402F35005F6C76 /* shaders.h */,
 				D4C4661623403C2C00165730 /* object.h */,
+				D42C682B23427C700087D386 /* tinyobj.h */,
+				D42C682C23427F5E0087D386 /* loader.h */,
 			);
 			path = includes;
+			sourceTree = "<group>";
+		};
+		D42C682923427BEA0087D386 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				D42C682A23427C310087D386 /* teapot.obj */,
+				D42C682F234293AF0087D386 /* cornellbox.obj */,
+				D42C6830234294000087D386 /* cornellbox.mtl */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 		D48E2760233ED64B007B8FB5 = {
@@ -118,6 +138,7 @@
 		D48E276B233ED64B007B8FB5 /* CGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				D42C682923427BEA0087D386 /* assets */,
 				D42B418523402ECA005F6C76 /* includes */,
 				D42B418423402EC4005F6C76 /* src */,
 				D48E276C233ED64B007B8FB5 /* main.c */,
@@ -199,6 +220,7 @@
 				D4F2824A2341B99800CB6B1B /* scene.c in Sources */,
 				D4C4661523403A0300165730 /* window.c in Sources */,
 				D42B418823402F35005F6C76 /* shaders.c in Sources */,
+				D42C682E23427F730087D386 /* loader.c in Sources */,
 				D48E276D233ED64B007B8FB5 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

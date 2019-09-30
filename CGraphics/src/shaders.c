@@ -10,33 +10,6 @@
 
 
 /**
- * Shader source file
- *
- * Returns a string of all the content of a source code file
- *
- * @param path relative file path to the source code
- * @return string content of the source code file
- */
-static GLchar* shaderSourceFile(char* path) {
-    FILE* stream = fopen(path, "r");
-    if (stream == NULL) {
-        fprintf(stderr, "File error: Failed to load shader: %s\n", path);
-        return NULL;
-    }
-    fseek(stream, 0L, SEEK_END);
-    size_t size = ftell(stream) + 1;
-    if (size == 0) {
-        fprintf(stderr, "File warning: empty shader source file: %s\n", path);
-    }
-    GLchar* source = (GLchar*)malloc(size * sizeof(GLchar));
-    rewind(stream);
-    fread(source, size, sizeof(char), stream);
-    source[size - 1] = '\0';
-    return source;
-}
-
-
-/**
  * Print shader compile log
  *
  * Print out in  the standard output the compiling logs of the provided shader
@@ -69,7 +42,9 @@ static void printShaderCompileLog(Shader shader) {
 static Shader loadShader(char* shader_file, GLenum shader_type) {
     GLint status;
     GLuint shader = glCreateShader(shader_type);
-    const GLchar *source_code = shaderSourceFile(shader_file);
+    char* source_code = loadFile(shader_file);
+
+    if (source_code == NULL) return 0;
 
     glShaderSource(shader, 1, &source_code, NULL);
     glCompileShader(shader);
@@ -78,7 +53,7 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
         fprintf(stderr, "Failed to compile shader: %s\n", "vertex_shader.glsl");
         printShaderCompileLog(shader);
     }
-    free((void *)source_code);
+    free(source_code);
     return shader;
 }
 

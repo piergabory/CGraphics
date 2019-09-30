@@ -9,8 +9,8 @@
 #ifndef shaders_h
 #define shaders_h
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "loader.h"
+
 #include <GL/glew.h>
 #include <GLKit/GLKMath.h>
 
@@ -30,6 +30,7 @@ typedef struct ShaderProgram {
  */
 enum ShaderAttributes {
     VERTEX_ATTRIBUTE_POSITION,
+    NORMAL_ATTRIBUTE_POSITION,
     COLOR_ATTRIBUTE_POSITION
 };
 

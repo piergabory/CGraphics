@@ -21,22 +21,24 @@ int main()
     Window window = initContext();
     Scene scene = createScene();
 
-    GLfloat vertices[] = {
-        -0.5f, -0.5f,  0.0f,     1.0f, 0.0f, 0.0f,
-         0.5f, -0.5f,  0.0f,     0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f,  0.0f,     0.0f, 0.0f, 1.0f
-    };
-    Mesh triangle_mesh = createMesh(vertices, 3, 3, 3);
+//    GLfloat vertices[] = {
+//        -0.5f, -0.5f,  0.0f,     1.0f, 0.0f, 0.0f,
+//         0.5f, -0.5f,  0.0f,     0.0f, 1.0f, 0.0f,
+//         0.0f,  0.5f,  0.0f,     0.0f, 0.0f, 1.0f
+//    };
+//    Mesh triangle_mesh = createMesh(vertices, 3, 3, 3);
 
     ShaderProgram shader_program = shaderProgram(
         "shaders/vertex_shader.glsl",
         "shaders/fragment_shader.glsl"
     );
 
-    Object triangle = createObject(triangle_mesh, shader_program);
+    Object triangle = importOBJ("assets/teapot.obj", shader_program);
 
     Instance* triangle_instance = addObjectToScene(&triangle, &scene);
+    float scale = 0.3;
     triangle_instance->model_view = GLKMatrix4Translate(triangle_instance->model_view, 0, 0, -2);
+    triangle_instance->model_view = GLKMatrix4Scale(triangle_instance->model_view, scale, scale, scale);
     
 
     // Event loop

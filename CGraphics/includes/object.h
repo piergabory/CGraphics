@@ -9,9 +9,12 @@
 #ifndef mesh_h
 #define mesh_h
 
+#include <string.h>
 #include <GL/glew.h>
+#include <GLKit/GLKMath.h>
 
 #include "shaders.h"
+#include "loader.h"
 
 /**
  * 3D Object Instance
@@ -54,6 +57,8 @@ Mesh createMesh(GLfloat* vertices, GLsizei count, GLsizei point_size, GLsizei co
  * @param material of the object
  */
 Object createObject(Mesh shape, ShaderProgram material);
+
+Object importOBJ(char* filepath, ShaderProgram program) ;
 
 /**
  * Draw Object
