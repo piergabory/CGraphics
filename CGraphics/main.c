@@ -22,9 +22,9 @@ int main()
     Scene scene = createScene();
 
     GLfloat vertices[] = {
-        -0.5f, -0.5f,  -10.0f,     1.0f, 0.0f, 0.0f,
-         0.5f, -0.5f,  -10.0f,     0.0f, 1.0f, 0.0f,
-         0.0f,  0.5f,  -10.0f,     0.0f, 0.0f, 1.0f
+        -0.5f, -0.5f,  -1.f,     1.0f, 0.0f, 0.0f,
+         0.5f, -0.5f,  -1.f,     0.0f, 1.0f, 0.0f,
+         0.0f,  0.5f,  -1.f,     0.0f, 0.0f, 1.0f
     };
     Mesh triangle_mesh = createMesh(vertices, 3, 3, 3);
 

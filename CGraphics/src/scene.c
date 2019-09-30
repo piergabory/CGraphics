@@ -54,8 +54,8 @@ void addObjectToScene(Object* model, Scene* scene) {
 void drawScene(Scene scene) {
     Instance* head = scene.root;
     while (head != NULL) {
-        bindObject(*head->model);
         updateUniforms(head->model->material, head->model_view, scene.camera);
+        bindObject(*head->model);
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;
     }
