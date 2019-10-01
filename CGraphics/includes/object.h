@@ -28,36 +28,6 @@ typedef struct Object {
     ShaderProgram material;
 } Object;
 
-/**
- * Mesh
- *
- * Array of floats representing a 3D shape
- */
-typedef struct Mesh {
-    GLsizei size;
-    unsigned int point_size;
-    unsigned int color_size;
-    GLfloat* vertices;
-} Mesh;
-
-
-/**
- * Create Mesh
- * @param vertices floating point values data array
- * @param count number of vertices
- * @param point_size number of floats per vertex defining the position
- * @param color_size number of floats per vertex defining the color
- */
-Mesh createMesh(GLfloat* vertices, GLsizei count, GLsizei point_size, GLsizei color_size);
-
-/**
- * Create Object
- *
- * @param shape of the object
- * @param material of the object
- */
-Object createObject(Mesh shape, ShaderProgram material);
-
 Object importOBJ(char* filepath, ShaderProgram program) ;
 
 /**
