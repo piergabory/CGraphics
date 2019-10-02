@@ -19,14 +19,25 @@ typedef struct Instance {
     struct Instance* next;
 } Instance;
 
+
+typedef struct LightPoint {
+    GLKVector3 position;
+} LightPoint;
+
+
 typedef struct Scene {
     Instance* root;
     GLKMatrix4 camera;
+
+    LightPoint **lights;
+    size_t light_count;
 } Scene;
 
 Scene createScene(void);
 
 void deleteScene(Scene newScene);
+
+void addLightSource(Scene* scene, GLKVector3 position);
 
 Instance* createInstance(Object* model);
 

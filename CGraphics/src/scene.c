@@ -12,13 +12,25 @@ Scene createScene() {
     Scene newScene;
     newScene.root = NULL;
     newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90.0f), 1.0f, 1.0f, 100.0f);
+    newScene.lights = NULL;
     return newScene;
 }
 
 void deleteScene(Scene newScene) {
     deleteInstance(newScene.root);
+    for (size_t index = 0; index < newScene.light_count; index++) {
+        free(newScene.lights[index]);
+    }
+    free(newScene.lights);
 }
 
+void addLightSource(Scene* scene, GLKVector3 position) {
+    LightPoint* newLight = malloc(sizeof(LightPoint));
+    newLight->position = position;
+    scene->light_count += 1;
+    scene->lights = realloc(scene->lights, sizeof(LightPoint*) * scene->light_count);
+    scene->lights[scene->light_count - 1] = newLight;
+}
 
 Instance* createInstance(Object* model) {
     Instance* newInstance = malloc(sizeof(Instance));
@@ -55,8 +67,13 @@ Instance* addObjectToScene(Object* model, Scene* scene) {
 
 void drawScene(Scene scene) {
     Instance* head = scene.root;
+
+    GLfloat* flatten_array = malloc(3 * scene.light_count * sizeof(GLfloat));
+    for (size_t vertex = 0; vertex < scene.light_count; vertex++)
+        memcpy(flatten_array + vertex, scene.lights[vertex]->position.v, 3);
+
     while (head != NULL) {
-        updateUniforms(head->model->material, head->model_view, scene.camera);
+        updateUniforms(head->model->material, head->model_view, scene.camera, flatten_array, (GLsizei)scene.light_count);
         bindObject(*head->model);
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;

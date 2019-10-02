@@ -30,7 +30,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     Object new_object;
     float* vertices;
     size_t face_offset = 0;
-    size_t i;
+    size_t face;
 
     /* Assume triangulated face. */
     size_t num_triangles = attributes.num_face_num_verts;
@@ -39,16 +39,16 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     vertices = (float*)malloc(sizeof(float) * stride * num_triangles * 3);
 
     // foreacch triangle
-    for (i = 0; i < attributes.num_face_num_verts; i++) {
-        size_t f;
-        assert(attributes.face_num_verts[i] % 3 == 0); /* assume all triangle faces. */
+    for (face = 0; face < attributes.num_face_num_verts; face++) {
+        size_t face_vertex;
+        assert(attributes.face_num_verts[face] % 3 == 0); /* assume all triangle faces. */
 
-        for (f = 0; f < (size_t)attributes.face_num_verts[i] / 3; f++) {
-            size_t k;
+        for (face_vertex = 0; face_vertex < (size_t)attributes.face_num_verts[face] / 3; face_vertex++) {
+            size_t vertex;
 
-            tinyobj_vertex_index_t idx0 = attributes.faces[face_offset + 3 * f + 0];
-            tinyobj_vertex_index_t idx1 = attributes.faces[face_offset + 3 * f + 1];
-            tinyobj_vertex_index_t idx2 = attributes.faces[face_offset + 3 * f + 2];
+            tinyobj_vertex_index_t idx0 = attributes.faces[face_offset + 3 * face_vertex + 0];
+            tinyobj_vertex_index_t idx1 = attributes.faces[face_offset + 3 * face_vertex + 1];
+            tinyobj_vertex_index_t idx2 = attributes.faces[face_offset + 3 * face_vertex + 2];
 
             GLKVector3 face_vertex[3] = {
                 GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx0.v_idx),
@@ -62,19 +62,16 @@ Object importOBJ(char* filepath, ShaderProgram program) {
                 GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx2.vn_idx)
             };
 
-            for (k = 0; k < 3; k++) {
-                vertices[(3 * i + k) * stride + 0] = face_vertex[k].v[0];
-                vertices[(3 * i + k) * stride + 1] = face_vertex[k].v[1];
-                vertices[(3 * i + k) * stride + 2] = face_vertex[k].v[2];
-                vertices[(3 * i + k) * stride + 3] = face_normal[k].v[0];
-                vertices[(3 * i + k) * stride + 4] = face_normal[k].v[1];
-                vertices[(3 * i + k) * stride + 5] = face_normal[k].v[2];
-                vertices[(3 * i + k) * stride + 6] = 1.0;
-                vertices[(3 * i + k) * stride + 7] = 1.0;
-                vertices[(3 * i + k) * stride + 8] = 1.0;
+            for (vertex = 0; vertex < 3; vertex++) {
+                // position
+                memcpy(vertices + ((3 * face + vertex) * stride + 0), face_vertex[vertex].v, 3 * sizeof(float));
+                // normal
+                memcpy(vertices + ((3 * face + vertex) * stride + 3), face_normal[vertex].v, 3 * sizeof(float));
+                // color
+                memcpy(vertices + ((3 * face + vertex) * stride + 6), face_normal[vertex].v, 3 * sizeof(float));
             }
         }
-        face_offset += (size_t)attributes.face_num_verts[i];
+        face_offset += (size_t)attributes.face_num_verts[face];
     }
 
     new_object.vbo = 0;
@@ -89,7 +86,6 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     glGenVertexArrays(1, &new_object.vao);
     glBindVertexArray(new_object.vao);
 
-    // Vertices Positions
     glEnableVertexAttribArray(VERTEX_ATTRIBUTE_POSITION);
     glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), 0);
 
@@ -106,8 +102,6 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     tinyobj_materials_free(materials, material_count);
 
     new_object.material = program;
-    
-    
 
     return new_object;
 }

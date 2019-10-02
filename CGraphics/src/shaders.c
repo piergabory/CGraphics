@@ -46,7 +46,7 @@ static Shader loadShader(char* shader_file, GLenum shader_type) {
 
     if (source_code == NULL) return 0;
 
-    glShaderSource(shader, 1, &source_code, NULL);
+    glShaderSource(shader, 1,(const GLchar**)&source_code, NULL);
     glCompileShader(shader);
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
     if (status != GL_TRUE) {
@@ -71,6 +71,8 @@ static void mapUniforms(ShaderProgram* program) {
     program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id,"model_view_projection_matrix_uniform");
     program->uniform_model_view_matrix = glGetUniformLocation(program->id,"model_view_matrix_uniform");
     program->uniform_normal_matrix = glGetUniformLocation(program->id, "normal_matrix_uniform");
+
+    program->uniform_lightpoint_array = glGetUniformLocation(program->id, "lightpoint_array");
 }
 
 
@@ -93,7 +95,7 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
     return shader_program;
 }
 
-void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection) {
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection, GLfloat lightpoints[], GLsizei light_count) {
     GLKMatrix4 model_view_projection = GLKMatrix4Multiply(projection, model_view);
     GLKMatrix4 normal = GLKMatrix4Invert(model_view, NULL);
 
@@ -101,4 +103,6 @@ void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 pro
     glUniformMatrix4fv(program.uniform_model_view_projection_matrix, 1, GL_FALSE, model_view_projection.m);
     glUniformMatrix4fv(program.uniform_model_view_matrix, 1, GL_FALSE, model_view.m);
     glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, normal.m);
+
+    glUniform3fv(program.uniform_lightpoint_array, light_count, lightpoints);
 }

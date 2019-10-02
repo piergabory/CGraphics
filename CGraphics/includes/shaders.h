@@ -20,9 +20,12 @@ typedef GLuint Shader;
 
 typedef struct ShaderProgram {
     GLuint id;
+
     GLuint uniform_model_view_projection_matrix;
     GLuint uniform_model_view_matrix;
     GLuint uniform_normal_matrix;
+
+    GLuint uniform_lightpoint_array;
 } ShaderProgram;
 
 /**
@@ -47,6 +50,6 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
 //GLKMatrix4 GLKMatrix4Invert(GLKMatrix4 matrix, void* invertible);
 
-void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection); 
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection, GLfloat lightpoints[], GLsizei lightpoint_count); 
 
 #endif /* shaders_h */

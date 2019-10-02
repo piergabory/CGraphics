@@ -6,15 +6,18 @@ in vec3 vertex_color_attribute;
 uniform mat4 model_view_projection_matrix_uniform;
 uniform mat4 model_view_matrix_uniform;
 uniform mat4 normal_matrix_uniform;
+uniform vec3 lightpoint_array[1];
 
 out vec3 vertex_position;
 out vec3 vertex_normal;
 out vec3 vertex_color;
+out vec3 lightsource_position[1];
 
 void main() {
     vertex_position = (model_view_matrix_uniform * vec4(vertex_position_attribute, 1)).xyz;
     vertex_normal = vertex_normal_attribute;
     vertex_color = vertex_color_attribute;
+    lightsource_position = lightpoint_array;
 
     gl_Position = model_view_projection_matrix_uniform * vec4(vertex_position_attribute, 1);
 }

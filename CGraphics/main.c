@@ -21,12 +21,7 @@ int main()
     Window window = initContext();
     Scene scene = createScene();
 
-//    GLfloat vertices[] = {
-//        -0.5f, -0.5f,  0.0f,     1.0f, 0.0f, 0.0f,
-//         0.5f, -0.5f,  0.0f,     0.0f, 1.0f, 0.0f,
-//         0.0f,  0.5f,  0.0f,     0.0f, 0.0f, 1.0f
-//    };
-//    Mesh triangle_mesh = createMesh(vertices, 3, 3, 3);
+    addLightSource(&scene, GLKVector3Make(0, 0, 0));
 
     ShaderProgram shader_program = shaderProgram(
         "shaders/vertex_shader.glsl",
@@ -44,9 +39,9 @@ int main()
     // Event loop
     while(!glfwWindowShouldClose(window))
     {
-        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.002, 0, 1, 0);
-        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.001, 0, 0, 1);
-        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.0002, 1, 0, 0);
+//        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.002, 0, 1, 0);
+//        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.001, 0, 0, 1);
+        triangle_instance->model_view = GLKMatrix4Rotate(triangle_instance->model_view,0.0002, 0, 1, 0);
 
         // Clear the screen to black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
