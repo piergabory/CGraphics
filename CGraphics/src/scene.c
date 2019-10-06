@@ -68,12 +68,8 @@ Instance* addObjectToScene(Object* model, Scene* scene) {
 void drawScene(Scene scene) {
     Instance* head = scene.root;
 
-    GLfloat* flatten_array = malloc(3 * scene.light_count * sizeof(GLfloat));
-    for (size_t vertex = 0; vertex < scene.light_count; vertex++)
-        memcpy(flatten_array + vertex, scene.lights[vertex]->position.v, 3);
-
     while (head != NULL) {
-        updateUniforms(head->model->material, head->model_view, scene.camera, flatten_array, (GLsizei)scene.light_count);
+        updateUniforms(head->model->material, head->model_view, scene.camera, scene.lights[0]->position.v, (GLsizei)scene.light_count);
         bindObject(*head->model);
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;

@@ -68,7 +68,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
                 // normal
                 memcpy(vertices + ((3 * face + vertex) * stride + 3), face_normal[vertex].v, 3 * sizeof(float));
                 // color
-                memcpy(vertices + ((3 * face + vertex) * stride + 6), face_normal[vertex].v, 3 * sizeof(float));
+                memcpy(vertices + ((3 * face + vertex) * stride + 6), GLKVector3Make(1.0, 0.5, 0.5).v, 3 * sizeof(float));
             }
         }
         face_offset += (size_t)attributes.face_num_verts[face];
@@ -87,7 +87,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     glBindVertexArray(new_object.vao);
 
     glEnableVertexAttribArray(VERTEX_ATTRIBUTE_POSITION);
-    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), 0);
+    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(0 * sizeof(float)));
 
     glEnableVertexAttribArray(NORMAL_ATTRIBUTE_POSITION);
     glVertexAttribPointer(NORMAL_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(3 * sizeof(float)));

@@ -104,5 +104,5 @@ void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 pro
     glUniformMatrix4fv(program.uniform_model_view_matrix, 1, GL_FALSE, model_view.m);
     glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, normal.m);
 
-    glUniform3fv(program.uniform_lightpoint_array, light_count, lightpoints);
+    glUniform3f(program.uniform_lightpoint_array, lightpoints[0], lightpoints[1], lightpoints[2]);
 }
