@@ -69,10 +69,10 @@ static void linkProgram(GLuint programId, Shader vertex_shader, Shader fragment_
 /// TODO: Doc
 static void mapUniforms(ShaderProgram* program) {
     program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id,"model_view_projection_matrix_uniform");
-    program->uniform_model_view_matrix = glGetUniformLocation(program->id,"model_view_matrix_uniform");
-    program->uniform_normal_matrix = glGetUniformLocation(program->id, "normal_matrix_uniform");
-
-    program->uniform_lightpoint_array = glGetUniformLocation(program->id, "lightpoint_array");
+    program->uniform_model_view_matrix =            glGetUniformLocation(program->id,"model_view_matrix_uniform");
+    program->uniform_normal_matrix =                glGetUniformLocation(program->id, "normal_matrix_uniform");
+    program->uniform_lightpoint_array =             glGetUniformLocation(program->id, "lightpoint_array");
+    program->uniform_material_struct =              glGetUniformLocation(program->id,"material");
 }
 
 

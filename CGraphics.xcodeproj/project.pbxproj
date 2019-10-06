@@ -45,6 +45,7 @@
 		D4565E06234007390093C4BB /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		D4565E0D23400BDD0093C4BB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		D47304E12349A85F00A31D1A /* structs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
 		D48E2769233ED64B007B8FB5 /* CGraphics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGraphics; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48E276C233ED64B007B8FB5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = main.c; sourceTree = "<group>"; };
 		D4C4661323403A0300165730 /* window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		D42B418523402ECA005F6C76 /* includes */ = {
 			isa = PBXGroup;
 			children = (
+				D47304E12349A85F00A31D1A /* structs.h */,
 				D4F282482341B99800CB6B1B /* scene.h */,
 				D4C4661323403A0300165730 /* window.h */,
 				D42B418623402F35005F6C76 /* shaders.h */,

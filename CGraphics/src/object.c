@@ -87,13 +87,13 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     glBindVertexArray(new_object.vao);
 
     glEnableVertexAttribArray(VERTEX_ATTRIBUTE_POSITION);
-    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(0 * sizeof(float)));
+    glVertexAttribPointer(VERTEX_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(0 * sizeof(float)));
 
     glEnableVertexAttribArray(NORMAL_ATTRIBUTE_POSITION);
-    glVertexAttribPointer(NORMAL_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(NORMAL_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(3 * sizeof(float)));
 
     glEnableVertexAttribArray(COLOR_ATTRIBUTE_POSITION);
-    glVertexAttribPointer(COLOR_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(6 * sizeof(float)));
+    glVertexAttribPointer(COLOR_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(6 * sizeof(float)));
 
     free(vertices);
 
@@ -101,7 +101,15 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     tinyobj_shapes_free(shapes, shape_count);
     tinyobj_materials_free(materials, material_count);
 
-    new_object.material = program;
+    new_object.shader = program;
+
+    Material mat = {
+        .shine = 32,
+        .specular = 0.9,
+        .diffuse = 0.1
+    };
+
+    new_object.material = mat;
 
     return new_object;
 }
@@ -112,7 +120,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
  */
 void bindObject(Object object) {
     glBindVertexArray(object.vao);
-    glUseProgram(object.material.id);
+    glUseProgram(object.shader.id);
 }
 
 

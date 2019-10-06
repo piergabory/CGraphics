@@ -1,5 +1,13 @@
 #version 400
 
+struct Material {
+    float shine;
+    float specular;
+    float diffuse;
+};
+
+uniform Material material;
+
 in vec3 vertex_position;
 in vec3 vertex_normal;
 in vec3 vertex_color;

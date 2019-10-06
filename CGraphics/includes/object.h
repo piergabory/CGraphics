@@ -15,18 +15,7 @@
 
 #include "shaders.h"
 #include "loader.h"
-
-/**
- * 3D Object Instance
- *
- * Contains pointer to the shaders, arrays and buffers representing a 3D object
- */
-typedef struct Object {
-    GLuint vbo;
-    GLuint vao;
-    GLsizei vertices_count;
-    ShaderProgram material;
-} Object;
+#include "structs.h"
 
 Object importOBJ(char* filepath, ShaderProgram program) ;
 

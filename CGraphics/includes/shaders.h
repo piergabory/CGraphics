@@ -9,24 +9,14 @@
 #ifndef shaders_h
 #define shaders_h
 
-#include "loader.h"
-
 #include <GL/glew.h>
-#include <GLKit/GLKMath.h>
+
+#include "structs.h"
+#include "loader.h"
 
 #define SHADER_DIR "shaders/"
 
 typedef GLuint Shader;
-
-typedef struct ShaderProgram {
-    GLuint id;
-
-    GLuint uniform_model_view_projection_matrix;
-    GLuint uniform_model_view_matrix;
-    GLuint uniform_normal_matrix;
-
-    GLuint uniform_lightpoint_array;
-} ShaderProgram;
 
 /**
  * Shader Attributes

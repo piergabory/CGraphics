@@ -10,28 +10,8 @@
 #define scene_h
 
 #include "object.h"
-#include <GLKit/GLKMath.h>
+#include "structs.h"
 
-typedef struct Instance {
-    Object* model;
-    GLKMatrix4 model_view;
-
-    struct Instance* next;
-} Instance;
-
-
-typedef struct LightPoint {
-    GLKVector3 position;
-} LightPoint;
-
-
-typedef struct Scene {
-    Instance* root;
-    GLKMatrix4 camera;
-
-    LightPoint **lights;
-    size_t light_count;
-} Scene;
 
 Scene createScene(void);
 

@@ -69,7 +69,7 @@ void drawScene(Scene scene) {
     Instance* head = scene.root;
 
     while (head != NULL) {
-        updateUniforms(head->model->material, head->model_view, scene.camera, scene.lights[0]->position.v, (GLsizei)scene.light_count);
+        updateUniforms(head->model->shader, head->model_view, scene.camera, scene.lights[0]->position.v, (GLsizei)scene.light_count);
         bindObject(*head->model);
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;
