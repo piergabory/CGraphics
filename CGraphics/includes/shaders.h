@@ -40,6 +40,8 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
 //GLKMatrix4 GLKMatrix4Invert(GLKMatrix4 matrix, void* invertible);
 
-void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection, GLfloat lightpoints[], GLsizei lightpoint_count); 
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection);
+
+void updateLights(ShaderProgram program, Light light);
 
 #endif /* shaders_h */

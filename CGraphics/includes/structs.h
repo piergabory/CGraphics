@@ -13,11 +13,15 @@
 
 typedef struct ShaderProgram {
     GLuint id;
-
     GLuint uniform_model_view_projection_matrix;
     GLuint uniform_model_view_matrix;
     GLuint uniform_normal_matrix;
-    GLuint uniform_material_struct;
+    GLuint uniform_material_shine;
+    GLuint uniform_material_specular;
+    GLuint uniform_material_diffuse;
+    GLuint uniform_material_color;
+    GLuint uniform_light_position;
+    GLuint uniform_light_color;
     GLuint uniform_lightpoint_array;
 } ShaderProgram;
 
@@ -42,22 +46,20 @@ typedef struct Object {
 typedef struct Instance {
     Object* model;
     GLKMatrix4 model_view;
-
     struct Instance* next;
 } Instance;
 
 
-typedef struct LightPoint {
+typedef struct Light {
     GLKVector3 position;
     GLKVector3 color;
-} LightPoint;
+} Light;
 
 
 typedef struct Scene {
     Instance* root;
     GLKMatrix4 camera;
-
-    LightPoint **lights;
+    Light **lights;
     size_t light_count;
 } Scene;
 

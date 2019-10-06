@@ -24,11 +24,12 @@ void deleteScene(Scene newScene) {
     free(newScene.lights);
 }
 
-void addLightSource(Scene* scene, GLKVector3 position) {
-    LightPoint* newLight = malloc(sizeof(LightPoint));
+void addLightSource(Scene* scene, GLKVector3 position, GLKVector3 color) {
+    Light* newLight = malloc(sizeof(Light));
     newLight->position = position;
+    newLight->color = color;
     scene->light_count += 1;
-    scene->lights = realloc(scene->lights, sizeof(LightPoint*) * scene->light_count);
+    scene->lights = realloc(scene->lights, sizeof(Light*) * scene->light_count);
     scene->lights[scene->light_count - 1] = newLight;
 }
 
@@ -69,8 +70,9 @@ void drawScene(Scene scene) {
     Instance* head = scene.root;
 
     while (head != NULL) {
-        updateUniforms(head->model->shader, head->model_view, scene.camera, scene.lights[0]->position.v, (GLsizei)scene.light_count);
         bindObject(*head->model);
+        updateUniforms(head->model->shader, head->model_view, scene.camera);
+        updateLights(head->model->shader, **(scene.lights));
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;
     }

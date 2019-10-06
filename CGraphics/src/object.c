@@ -105,13 +105,20 @@ Object importOBJ(char* filepath, ShaderProgram program) {
 
     Material mat = {
         .shine = 32,
-        .specular = 0.9,
-        .diffuse = 0.1
+        .specular = 0.3,
+        .diffuse = 0.7
     };
 
     new_object.material = mat;
 
     return new_object;
+}
+
+void useMaterial(Object object) {
+    glUniform1f(object.shader.uniform_material_shine, object.material.shine);
+    glUniform1f(object.shader.uniform_material_specular, object.material.specular);
+    glUniform1f(object.shader.uniform_material_diffuse, object.material.diffuse);
+    glUniform3fv(object.shader.uniform_material_color, 1, object.material.color.v);
 }
 
 /**
@@ -121,6 +128,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
 void bindObject(Object object) {
     glBindVertexArray(object.vao);
     glUseProgram(object.shader.id);
+    useMaterial(object);
 }
 
 

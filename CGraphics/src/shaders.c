@@ -71,8 +71,12 @@ static void mapUniforms(ShaderProgram* program) {
     program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id,"model_view_projection_matrix_uniform");
     program->uniform_model_view_matrix =            glGetUniformLocation(program->id,"model_view_matrix_uniform");
     program->uniform_normal_matrix =                glGetUniformLocation(program->id, "normal_matrix_uniform");
-    program->uniform_lightpoint_array =             glGetUniformLocation(program->id, "lightpoint_array");
-    program->uniform_material_struct =              glGetUniformLocation(program->id,"material");
+    program->uniform_material_shine = glGetUniformLocation(program->id,"material.shine");
+    program->uniform_material_specular = glGetUniformLocation(program->id,"material.specular");
+    program->uniform_material_diffuse = glGetUniformLocation(program->id,"material.diffuse");
+    program->uniform_material_color = glGetUniformLocation(program->id,"material.color");
+    program->uniform_light_position = glGetUniformLocation(program->id, "light.position");
+    program->uniform_light_color = glGetUniformLocation(program->id, "light.color");
 }
 
 
@@ -95,14 +99,16 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
     return shader_program;
 }
 
-void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection, GLfloat lightpoints[], GLsizei light_count) {
+void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection) {
     GLKMatrix4 model_view_projection = GLKMatrix4Multiply(projection, model_view);
     GLKMatrix4 normal = GLKMatrix4Invert(model_view, NULL);
-
     glUseProgram(program.id);
     glUniformMatrix4fv(program.uniform_model_view_projection_matrix, 1, GL_FALSE, model_view_projection.m);
     glUniformMatrix4fv(program.uniform_model_view_matrix, 1, GL_FALSE, model_view.m);
     glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, normal.m);
+}
 
-    glUniform3f(program.uniform_lightpoint_array, lightpoints[0], lightpoints[1], lightpoints[2]);
+void updateLights(ShaderProgram program, Light light) {
+    glUniform3fv(program.uniform_light_color, 1, light.color.v);
+    glUniform3fv(program.uniform_light_position, 1, light.position.v);
 }

@@ -104,8 +104,8 @@
 				D4C4661323403A0300165730 /* window.h */,
 				D42B418623402F35005F6C76 /* shaders.h */,
 				D4C4661623403C2C00165730 /* object.h */,
-				D42C682B23427C700087D386 /* tinyobj.h */,
 				D42C682C23427F5E0087D386 /* loader.h */,
+				D42C682B23427C700087D386 /* tinyobj.h */,
 			);
 			path = includes;
 			sourceTree = "<group>";
