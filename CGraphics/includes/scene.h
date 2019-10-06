@@ -17,7 +17,7 @@ Scene createScene(void);
 
 void deleteScene(Scene newScene);
 
-void addLightSource(Scene* scene, GLKVector3 position, GLKVector3 color);
+void addLightSource(Scene* scene, GLKVector3 position, GLKVector4 color);
 
 Instance* createInstance(Object* model);
 

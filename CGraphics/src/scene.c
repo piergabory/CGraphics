@@ -24,7 +24,7 @@ void deleteScene(Scene newScene) {
     free(newScene.lights);
 }
 
-void addLightSource(Scene* scene, GLKVector3 position, GLKVector3 color) {
+void addLightSource(Scene* scene, GLKVector3 position, GLKVector4 color) {
     Light* newLight = malloc(sizeof(Light));
     newLight->position = position;
     newLight->color = color;

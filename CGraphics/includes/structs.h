@@ -52,7 +52,7 @@ typedef struct Instance {
 
 typedef struct Light {
     GLKVector3 position;
-    GLKVector3 color;
+    GLKVector4 color;
 } Light;
 
 
@@ -60,6 +60,7 @@ typedef struct Scene {
     Instance* root;
     GLKMatrix4 camera;
     Light **lights;
+    GLKVector4 ambient;
     size_t light_count;
 } Scene;
 

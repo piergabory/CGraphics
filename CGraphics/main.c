@@ -21,7 +21,7 @@ int main()
     Window window = initContext();
     Scene scene = createScene();
 
-    addLightSource(&scene, GLKVector3Make(10, 0, 0), GLKVector3Make(1.0, 1.0, 1.0));
+    addLightSource(&scene, GLKVector3Make(10, 0, 0), GLKVector4Make(1.0, 1.0, 1.0, 1.0));
 
     ShaderProgram shader_program = shaderProgram(
         "shaders/vertex_shader.glsl",
