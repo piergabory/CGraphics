@@ -42,6 +42,6 @@ ShaderProgram shaderProgram(char* vertex_shader_file, char* fragment_shader_file
 
 void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 projection);
 
-void updateLights(ShaderProgram program, Light light);
+void updateLights(ShaderProgram program, Light* lights[], size_t lightCount);
 
 #endif /* shaders_h */

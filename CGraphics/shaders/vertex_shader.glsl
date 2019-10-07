@@ -1,12 +1,13 @@
 #version 400
-in vec3 vertex_position_attribute;
-in vec3 vertex_normal_attribute;
-in vec3 vertex_color_attribute;
 
 uniform mat4 model_view_projection_matrix_uniform;
 uniform mat4 model_view_matrix_uniform;
 uniform mat4 normal_matrix_uniform;
 uniform vec3 lightpoint_array;
+
+in vec3 vertex_position_attribute;
+in vec3 vertex_normal_attribute;
+in vec3 vertex_color_attribute;
 
 out vec3 vertex_position;
 out vec3 vertex_normal;
