@@ -10,6 +10,7 @@ struct Material {
 struct Light {
     vec3 position;
     vec4 color;
+    mat4 projection;
 };
 
 vec3 phong(Light light, Material material, vec3 normal, vec3 view) {

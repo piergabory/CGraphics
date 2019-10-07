@@ -50,9 +50,11 @@ typedef struct Instance {
 } Instance;
 
 
+#define LIGHT_STRUCT_PROPERTY_COUNT 3
 typedef struct Light {
     GLKVector3 position;
     GLKVector4 color;
+    GLKMatrix4 projection;
 } Light;
 
 

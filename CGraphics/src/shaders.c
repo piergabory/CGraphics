@@ -112,7 +112,7 @@ void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 pro
 void updateLights(ShaderProgram program, Light* lights[], GLsizei lightCount) {
     glUniform1i(program.uniform_light_count, lightCount);
     for (GLsizei index = 0; index < lightCount; index++) {
-        glUniform4fv(program.uniform_lights_color + 2 * index, 1, lights[index]->color.v);
-        glUniform3fv(program.uniform_lights_position + 2 * index, 1, lights[index]->position.v);
+        glUniform4fv(program.uniform_lights_color + LIGHT_STRUCT_PROPERTY_COUNT * index, 1, lights[index]->color.v);
+        glUniform3fv(program.uniform_lights_position + LIGHT_STRUCT_PROPERTY_COUNT * index, 1, lights[index]->position.v);
     }
 }
