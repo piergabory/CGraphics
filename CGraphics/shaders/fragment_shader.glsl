@@ -9,22 +9,24 @@ struct Material {
 
 struct Light {
     vec3 position;
-    vec3 color;
+    vec4 color;
 };
 
 vec3 phong(Light light, Material material, vec3 normal, vec3 view) {
     vec3 ray = normalize(light.position - view);
     normal = normalize(normal);
     view = normalize(-view);
+    vec3 color = light.color.rgb;
+    float intensity = light.color.a;
 
     // Specular
     vec3 reflection = reflect(-ray, normal);
-    vec3 specular = material.specular * light.color * pow(max(dot(view, reflection), 0.0), material.shine);
+    vec3 specular = material.specular * color * pow(max(dot(view, reflection), 0.0), material.shine);
 
     // Diffuse
-    vec3 diffuse = material.diffuse * light.color * max(dot(normal, ray), 0.0);;
+    vec3 diffuse = material.diffuse * color * max(dot(normal, ray), 0.0);
 
-    return diffuse + specular;
+    return (diffuse + specular) * intensity;
 }
 
 const vec3 ambient = vec3(0.2);
@@ -40,9 +42,10 @@ in vec3 vertex_color;
 out vec4 fragment_color;
 
 void main() {
-    vec3 lighting = vec3(0);
-    lighting += phong(lights[0], material, vertex_normal, vertex_position);
-    lighting += phong(lights[1], material, vertex_normal, vertex_position);
-    vec3 result = (ambient + lighting) * vertex_color;
+    vec3 phongs = vec3(0);
+    for (int index = 0; index < 10 && index < light_count; index ++) {
+        phongs += phong(lights[index], material, vertex_normal, vertex_position);
+    }
+    vec3 result = ambient + phongs;
     fragment_color = vec4(result, 1.0);
 }

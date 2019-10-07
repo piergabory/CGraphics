@@ -20,10 +20,9 @@ typedef struct ShaderProgram {
     GLuint uniform_material_specular;
     GLuint uniform_material_diffuse;
     GLuint uniform_material_color;
-    GLuint uniform_light_position;
-    
-    GLuint uniform_light_color;
-    GLuint uniform_lightpoint_array;
+    GLuint uniform_lights_position;
+    GLuint uniform_lights_color;
+    GLuint uniform_light_count;
 } ShaderProgram;
 
 

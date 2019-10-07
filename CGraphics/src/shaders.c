@@ -75,8 +75,9 @@ static void mapUniforms(ShaderProgram* program) {
     program->uniform_material_specular = glGetUniformLocation(program->id,"material.specular");
     program->uniform_material_diffuse = glGetUniformLocation(program->id,"material.diffuse");
     program->uniform_material_color = glGetUniformLocation(program->id,"material.color");
-    program->uniform_light_position = glGetUniformLocation(program->id, "lights[0].position");
-    program->uniform_light_color = glGetUniformLocation(program->id, "lights[0].color");
+    program->uniform_lights_position = glGetUniformLocation(program->id, "lights[0].position");
+    program->uniform_lights_color = glGetUniformLocation(program->id, "lights[0].color");
+    program->uniform_light_count = glGetUniformLocation(program->id, "light_count");
 }
 
 
@@ -108,9 +109,10 @@ void updateUniforms(ShaderProgram program, GLKMatrix4 model_view, GLKMatrix4 pro
     glUniformMatrix4fv(program.uniform_normal_matrix, 1, GL_TRUE, normal.m);
 }
 
-void updateLights(ShaderProgram program, Light* lights[], size_t lightCount) {
-    glUniform3fv(program.uniform_light_color, 1, lights[0]->color.v);
-    glUniform3fv(program.uniform_light_position, 1, lights[0]->position.v);
-    glUniform3fv(program.uniform_light_color + 2, 1, lights[1]->color.v);
-    glUniform3fv(program.uniform_light_position + 2, 1, lights[1]->position.v);
+void updateLights(ShaderProgram program, Light* lights[], GLsizei lightCount) {
+    glUniform1i(program.uniform_light_count, lightCount);
+    for (GLsizei index = 0; index < lightCount; index++) {
+        glUniform4fv(program.uniform_lights_color + 2 * index, 1, lights[index]->color.v);
+        glUniform3fv(program.uniform_lights_position + 2 * index, 1, lights[index]->position.v);
+    }
 }

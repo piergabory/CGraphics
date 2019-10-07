@@ -21,8 +21,9 @@ int main()
     Window window = initContext();
     Scene scene = createScene();
 
-    addLightSource(&scene, GLKVector3Make(-10, 20, 0), GLKVector4Make(0.0, 1.0, 1.0, 1.0));
-    addLightSource(&scene, GLKVector3Make(10, 0, 0), GLKVector4Make(1.0, 1.0, 1.0, 1.0));
+    addLightSource(&scene, GLKVector3Make(-10, 0, 0), GLKVector4Make(1.0f, 0.3f, 0.0f, 0.1));
+    addLightSource(&scene, GLKVector3Make(10, 0, -10), GLKVector4Make(0.0f, 0.6f, 1.0f, 0.2));
+    addLightSource(&scene, GLKVector3Make(0, 5, 0), GLKVector4Make(1.0, 1.0, 1.0, 1.0));
 
 
     ShaderProgram shader_program = shaderProgram(
