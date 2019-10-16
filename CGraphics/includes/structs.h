@@ -20,10 +20,18 @@ typedef struct ShaderProgram {
     GLuint uniform_material_specular;
     GLuint uniform_material_diffuse;
     GLuint uniform_material_color;
+    GLuint uniform_material_texture;
     GLuint uniform_lights_position;
     GLuint uniform_lights_color;
     GLuint uniform_light_count;
 } ShaderProgram;
+
+typedef struct Image {
+    size_t width;
+    size_t height;
+    int alpha;
+    unsigned char *bytes;
+} Image;
 
 
 typedef struct Material {
@@ -31,6 +39,7 @@ typedef struct Material {
     float specular;
     float diffuse;
     GLKVector3 color;
+    GLuint texture;
 } Material;
 
 

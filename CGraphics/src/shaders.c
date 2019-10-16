@@ -68,13 +68,20 @@ static void linkProgram(GLuint programId, Shader vertex_shader, Shader fragment_
 
 /// TODO: Doc
 static void mapUniforms(ShaderProgram* program) {
-    program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id,"model_view_projection_matrix_uniform");
-    program->uniform_model_view_matrix =            glGetUniformLocation(program->id,"model_view_matrix_uniform");
+    program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id, "model_view_projection_matrix_uniform");
+    program->uniform_model_view_matrix =            glGetUniformLocation(program->id, "model_view_matrix_uniform");
     program->uniform_normal_matrix =                glGetUniformLocation(program->id, "normal_matrix_uniform");
-    program->uniform_material_shine = glGetUniformLocation(program->id,"material.shine");
-    program->uniform_material_specular = glGetUniformLocation(program->id,"material.specular");
-    program->uniform_material_diffuse = glGetUniformLocation(program->id,"material.diffuse");
-    program->uniform_material_color = glGetUniformLocation(program->id,"material.color");
+
+    glActiveTexture(GL_TEXTURE0);
+    program->uniform_material_texture = glGetUniformLocation(program->id, "texture_sampler");
+    glUniform1d(program->uniform_material_texture, 0);
+
+
+    program->uniform_material_shine = glGetUniformLocation(program->id, "material.shine");
+    program->uniform_material_specular = glGetUniformLocation(program->id, "material.specular");
+    program->uniform_material_diffuse = glGetUniformLocation(program->id, "material.diffuse");
+    program->uniform_material_color = glGetUniformLocation(program->id, "material.color");
+
     program->uniform_lights_position = glGetUniformLocation(program->id, "lights[0].position");
     program->uniform_lights_color = glGetUniformLocation(program->id, "lights[0].color");
     program->uniform_light_count = glGetUniformLocation(program->id, "light_count");

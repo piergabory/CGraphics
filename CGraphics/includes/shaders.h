@@ -24,7 +24,7 @@ typedef GLuint Shader;
 enum ShaderAttributes {
     VERTEX_ATTRIBUTE_POSITION,
     NORMAL_ATTRIBUTE_POSITION,
-    COLOR_ATTRIBUTE_POSITION
+    UV_ATTRIBUTE_POSITION
 };
 
 /**

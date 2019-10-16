@@ -34,48 +34,34 @@ Object importOBJ(char* filepath, ShaderProgram program) {
 
     /* Assume triangulated face. */
     size_t num_triangles = attributes.num_face_num_verts;
-    size_t stride = 9; /* 9 = pos(3float), normal(3float), color(3float) */
+    size_t stride = 3 + 3 + 2; /* 9 = pos(3float), normal(3float), UV(2float) */
 
-    vertices = (float*)malloc(sizeof(float) * stride * num_triangles * 3);
+    vertices = (float*)calloc(stride * num_triangles * 3, sizeof(float));
 
     // foreacch triangle
     for (face = 0; face < attributes.num_face_num_verts; face++) {
-        size_t face_vertex;
-        assert(attributes.face_num_verts[face] % 3 == 0); /* assume all triangle faces. */
+        assert(attributes.face_num_verts[face] % 3 == 0 && "Assume all triangle faces.");
+        for (size_t face_vertex_index = 0; face_vertex_index < (size_t)attributes.face_num_verts[face] / 3; face_vertex_index++) {
+            for (size_t vertex_index = 0; vertex_index < 3; vertex_index++) {
+                tinyobj_vertex_index_t idx = attributes.faces[face_offset + 3 * face_vertex_index + vertex_index];
+                size_t byte_position = (3 * face + vertex_index) * stride;
 
-        for (face_vertex = 0; face_vertex < (size_t)attributes.face_num_verts[face] / 3; face_vertex++) {
-            size_t vertex;
+                GLKVector3 vertex = GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx.v_idx);
+                GLKVector3 normal = GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx.vn_idx);
+                GLKVector2 uv = GLKVector2MakeWithArray(attributes.texcoords + 3 * (size_t)idx.vt_idx);
 
-            tinyobj_vertex_index_t idx0 = attributes.faces[face_offset + 3 * face_vertex + 0];
-            tinyobj_vertex_index_t idx1 = attributes.faces[face_offset + 3 * face_vertex + 1];
-            tinyobj_vertex_index_t idx2 = attributes.faces[face_offset + 3 * face_vertex + 2];
-
-            GLKVector3 face_vertex[3] = {
-                GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx0.v_idx),
-                GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx1.v_idx),
-                GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx2.v_idx)
-            };
-
-            GLKVector3 face_normal[3] =  {
-                GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx0.vn_idx),
-                GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx1.vn_idx),
-                GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx2.vn_idx)
-            };
-
-            for (vertex = 0; vertex < 3; vertex++) {
-                // position
-                memcpy(vertices + ((3 * face + vertex) * stride + 0), face_vertex[vertex].v, 3 * sizeof(float));
-                // normal
-                memcpy(vertices + ((3 * face + vertex) * stride + 3), face_normal[vertex].v, 3 * sizeof(float));
-                // color
-                memcpy(vertices + ((3 * face + vertex) * stride + 6), GLKVector3Make(1.0, 0.5, 0.5).v, 3 * sizeof(float));
+                memcpy(vertices + byte_position + 0, vertex.v, 3 * sizeof(float));
+                memcpy(vertices + byte_position + 3, normal.v, 3 * sizeof(float));
+                memcpy(vertices + byte_position + 6, uv.v, 2 * sizeof(float));
             }
         }
+
         face_offset += (size_t)attributes.face_num_verts[face];
     }
 
     new_object.vbo = 0;
     new_object.vertices_count = 0;
+
     if (num_triangles > 0) {
         glGenBuffers(1, &new_object.vbo);
         glBindBuffer(GL_ARRAY_BUFFER, new_object.vbo);
@@ -92,24 +78,23 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     glEnableVertexAttribArray(NORMAL_ATTRIBUTE_POSITION);
     glVertexAttribPointer(NORMAL_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(3 * sizeof(float)));
 
-    glEnableVertexAttribArray(COLOR_ATTRIBUTE_POSITION);
-    glVertexAttribPointer(COLOR_ATTRIBUTE_POSITION, 3, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(UV_ATTRIBUTE_POSITION);
+    glVertexAttribPointer(UV_ATTRIBUTE_POSITION, 2, GL_FLOAT, GL_FALSE, (GLsizei) stride * sizeof(float), (void*)(6 * sizeof(float)));
 
     free(vertices);
-
     tinyobj_attrib_free(&attributes);
     tinyobj_shapes_free(shapes, shape_count);
     tinyobj_materials_free(materials, material_count);
 
-    new_object.shader = program;
-
     Material mat = {
         .shine = 32,
         .specular = 0.3,
-        .diffuse = 0.7
+        .diffuse = 0.7,
+        .texture = 0
     };
 
     new_object.material = mat;
+    new_object.shader = program;
 
     return new_object;
 }
@@ -119,6 +104,14 @@ void useMaterial(Object object) {
     glUniform1f(object.shader.uniform_material_specular, object.material.specular);
     glUniform1f(object.shader.uniform_material_diffuse, object.material.diffuse);
     glUniform3fv(object.shader.uniform_material_color, 1, object.material.color.v);
+    glBindTexture(GL_TEXTURE_2D, object.material.texture);
+}
+
+
+Object importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram program) {
+    Object new_object = importOBJ(filepath, program);
+    new_object.material.texture = loadTexture(texturepath);
+    return new_object;
 }
 
 /**
@@ -142,4 +135,5 @@ void bindObject(Object object) {
 void deleteObject(Object object) {
     glDeleteBuffers(1, &object.vbo);
     glDeleteBuffers(1, &object.vao);
+    glDeleteTextures(1, &object.material.texture);
 }

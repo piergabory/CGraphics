@@ -31,12 +31,28 @@ int main()
         "shaders/fragment_shader.glsl"
     );
 
+    ShaderProgram skybox_shader = shaderProgram(
+       "shaders/skybox.vs.glsl",
+       "shaders/skybox.fs.glsl"
+   );
+
     Object triangle = importOBJ("assets/teapot.obj", shader_program);
+    Object skybox = importTexturedOBJ("assets/skybox.obj", "assets/textures/skybox.png", skybox_shader);
+
+    Instance* skybox_instance = addObjectToScene(&skybox, &scene);
+    skybox_instance->model_view = GLKMatrix4Scale(skybox_instance->model_view, 10, 10, 10);
+
 
     Instance* triangle_instance = addObjectToScene(&triangle, &scene);
     float scale = 0.3;
     triangle_instance->model_view = GLKMatrix4Translate(triangle_instance->model_view, 0, 0, -2);
     triangle_instance->model_view = GLKMatrix4Scale(triangle_instance->model_view, scale, scale, scale);
+
+//    Instance* triangle_instance_2 = addObjectToScene(&triangle, &scene);
+//    scale = 0.1;
+//    triangle_instance_2->model_view = GLKMatrix4Translate(triangle_instance->model_view, 10, 0, -2);
+//    triangle_instance_2->model_view = GLKMatrix4Scale(triangle_instance->model_view, scale, scale, scale);
+
     
 
     // Event loop
@@ -56,6 +72,7 @@ int main()
 
     
     deleteObject(triangle);
+    deleteObject(skybox);
     deleteScene(scene);
 
     // Terminate GLFW
