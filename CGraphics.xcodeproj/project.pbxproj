@@ -74,6 +74,7 @@
 		D4D9DD152357FFCE00290C11 /* shader_programs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_programs.h; sourceTree = "<group>"; };
 		D4D9DD1A2358077A00290C11 /* skybox.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.obj; sourceTree = "<group>"; };
 		D4D9DD1B2358079300290C11 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
+		D4D9DD1C2358096C00290C11 /* monkey.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = monkey.obj; sourceTree = "<group>"; };
 		D4DE05D023578D4A00DADF43 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		D4DE05D123578D4A00DADF43 /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
 		D4EB31CC2340139C00CFF8AA /* basic.vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = basic.vs.glsl; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 			children = (
 				D4D9DD1B2358079300290C11 /* teapot.obj */,
 				D4D9DD1A2358077A00290C11 /* skybox.obj */,
+				D4D9DD1C2358096C00290C11 /* monkey.obj */,
 				D42901BA2357B48500413FFF /* textures */,
 			);
 			path = assets;
@@ -209,10 +211,10 @@
 			isa = PBXGroup;
 			children = (
 				D42901B62357ADE700413FFF /* libpng16.16.dylib */,
-				D43A985523426D6B0059E3AA /* GLKit.framework */,
-				D4565E0D23400BDD0093C4BB /* Cocoa.framework */,
 				D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */,
 				D4565E06234007390093C4BB /* libglfw.3.3.dylib */,
+				D43A985523426D6B0059E3AA /* GLKit.framework */,
+				D4565E0D23400BDD0093C4BB /* Cocoa.framework */,
 				D4D6F79A233EE13900C4BE47 /* OpenGL.framework */,
 			);
 			name = Frameworks;

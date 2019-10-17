@@ -133,7 +133,7 @@ GLuint loadTexture(char *png_filename) {
         glBindTexture(GL_TEXTURE_2D, texture);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei) image.width, (GLsizei) image.height, 0, GL_BGRA, GL_UNSIGNED_BYTE, image.bytes);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei) image.width, (GLsizei) image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bytes);
     } else {
         printf("failed to bind texture to object: %s\n", png_filename);
     }

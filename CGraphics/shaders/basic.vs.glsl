@@ -4,9 +4,9 @@ uniform mat4 model_view_projection_matrix_uniform;
 uniform mat4 model_view_matrix_uniform;
 uniform mat4 normal_matrix_uniform;
 
-in vec3 vertex_position_attribute;
-in vec3 vertex_normal_attribute;
-in vec2 vertex_uv_attribute;
+layout(location = 0) in vec3 vertex_position_attribute;
+layout(location = 1) in vec3 vertex_normal_attribute;
+layout(location = 2) in vec2 vertex_uv_attribute;
 
 out vec3 vertex_position;
 out vec3 vertex_normal;

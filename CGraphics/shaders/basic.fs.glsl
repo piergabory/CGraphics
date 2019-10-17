@@ -24,12 +24,12 @@ vec3 phong(Light light, Material material, vec3 normal, vec3 view, vec3 pixel) {
     vec3 specular = material.specular * color * pow(max(dot(view, reflection), 0.0), material.shine);
 
     // Diffuse
-    vec3 diffuse = pixel.rgb * color * max(dot(normal, ray), 0.0);
+    vec3 diffuse = pixel * max(dot(normal, ray), 0.0);
 
     return (diffuse + specular) * intensity;
 }
 
-const vec3 ambient = vec3(0.2);
+const vec3 ambient = vec3(0.839215686, 0.792156863, 0.690196078) * 0.1;
 
 uniform Material material;
 uniform Light lights[10];
