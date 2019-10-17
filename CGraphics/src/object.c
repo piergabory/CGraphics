@@ -41,19 +41,16 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     // foreacch triangle
     for (face = 0; face < attributes.num_face_num_verts; face++) {
         assert(attributes.face_num_verts[face] % 3 == 0 && "Assume all triangle faces.");
-        for (size_t face_vertex_index = 0; face_vertex_index < (size_t)attributes.face_num_verts[face] / 3; face_vertex_index++) {
-            for (size_t vertex_index = 0; vertex_index < 3; vertex_index++) {
-                tinyobj_vertex_index_t idx = attributes.faces[face_offset + 3 * face_vertex_index + vertex_index];
-                size_t byte_position = (3 * face + vertex_index) * stride;
+        for (size_t vertex_index = 0; vertex_index < attributes.face_num_verts[face]; vertex_index++) {
+            tinyobj_vertex_index_t idx = attributes.faces[face_offset + vertex_index];
+            GLKVector3 vertex = GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx.v_idx);
+            GLKVector3 normal = GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx.vn_idx);
+            GLKVector2 uv =     GLKVector2MakeWithArray(attributes.texcoords + 2 * (size_t)idx.vt_idx);
 
-                GLKVector3 vertex = GLKVector3MakeWithArray(attributes.vertices + 3 * (size_t)idx.v_idx);
-                GLKVector3 normal = GLKVector3MakeWithArray(attributes.normals + 3 * (size_t)idx.vn_idx);
-                GLKVector2 uv = GLKVector2MakeWithArray(attributes.texcoords + 3 * (size_t)idx.vt_idx);
-
-                memcpy(vertices + byte_position + 0, vertex.v, 3 * sizeof(float));
-                memcpy(vertices + byte_position + 3, normal.v, 3 * sizeof(float));
-                memcpy(vertices + byte_position + 6, uv.v, 2 * sizeof(float));
-            }
+            size_t byte_position = (3 * face + vertex_index) * stride;
+            memcpy(vertices + byte_position + 0, vertex.v, 3 * sizeof(float));
+            memcpy(vertices + byte_position + 3, normal.v, 3 * sizeof(float));
+            memcpy(vertices + byte_position + 6, uv.v, 2 * sizeof(float));
         }
 
         face_offset += (size_t)attributes.face_num_verts[face];

@@ -56,24 +56,28 @@
 		D42C682C23427F5E0087D386 /* loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loader.h; sourceTree = "<group>"; };
 		D42C682D23427F730087D386 /* loader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = loader.c; sourceTree = "<group>"; };
 		D43A985523426D6B0059E3AA /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		D4469CCC2357DB31009E297F /* CGraphics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGraphics; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4469CD02357DB97009E297F /* normal.fs.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = normal.fs.glsl; sourceTree = "<group>"; };
+		D4469CD12357DB97009E297F /* normal.vs.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = normal.vs.glsl; sourceTree = "<group>"; };
 		D4565E06234007390093C4BB /* libglfw.3.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.3.dylib; path = ../../../../usr/local/Cellar/glfw/3.3/lib/libglfw.3.3.dylib; sourceTree = "<group>"; };
 		D4565E08234007900093C4BB /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		D4565E0D23400BDD0093C4BB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D46098222357C714005A7D48 /* skybox.fs.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.fs.glsl; sourceTree = "<group>"; };
 		D46098232357C714005A7D48 /* skybox.vs.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.vs.glsl; sourceTree = "<group>"; };
+		D46098252357D7FE005A7D48 /* null.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = null.png; sourceTree = "<group>"; };
 		D47304E12349A85F00A31D1A /* structs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
-		D48E2769233ED64B007B8FB5 /* CGraphics */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CGraphics; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48E276C233ED64B007B8FB5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; lineEnding = 0; path = main.c; sourceTree = "<group>"; };
 		D4C4661323403A0300165730 /* window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
 		D4C4661423403A0300165730 /* window.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = window.c; sourceTree = "<group>"; };
 		D4C4661623403C2C00165730 /* object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = object.h; sourceTree = "<group>"; };
 		D4C4661723403C2C00165730 /* object.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = object.c; sourceTree = "<group>"; };
 		D4D6F79A233EE13900C4BE47 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		D4D9DD152357FFCE00290C11 /* shader_programs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_programs.h; sourceTree = "<group>"; };
 		D4DE05CF2356D19E00DADF43 /* skybox.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.obj; sourceTree = "<group>"; };
 		D4DE05D023578D4A00DADF43 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		D4DE05D123578D4A00DADF43 /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
-		D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = vertex_shader.glsl; sourceTree = "<group>"; };
-		D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = fragment_shader.glsl; sourceTree = "<group>"; };
+		D4EB31CC2340139C00CFF8AA /* basic.vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = basic.vs.glsl; sourceTree = "<group>"; };
+		D4EB31CD2340139F00CFF8AA /* basic.fs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = basic.fs.glsl; sourceTree = "<group>"; };
 		D4F282482341B99800CB6B1B /* scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
 		D4F282492341B99800CB6B1B /* scene.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = scene.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +102,7 @@
 		D42901BA2357B48500413FFF /* textures */ = {
 			isa = PBXGroup;
 			children = (
+				D46098252357D7FE005A7D48 /* null.png */,
 				D42901BB2357B48500413FFF /* skybox.png */,
 			);
 			path = textures;
@@ -106,9 +111,9 @@
 		D42B418323402E87005F6C76 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				D4469CCD2357DB3A009E297F /* normal */,
+				D48290912357DB0B00EFC074 /* basics */,
 				D46098242357C717005A7D48 /* skybox */,
-				D4EB31CD2340139F00CFF8AA /* fragment_shader.glsl */,
-				D4EB31CC2340139C00CFF8AA /* vertex_shader.glsl */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				D4F282482341B99800CB6B1B /* scene.h */,
 				D4C4661323403A0300165730 /* window.h */,
 				D42B418623402F35005F6C76 /* shaders.h */,
+				D4D9DD152357FFCE00290C11 /* shader_programs.h */,
 				D4C4661623403C2C00165730 /* object.h */,
 				D42C682C23427F5E0087D386 /* loader.h */,
 				D42C682B23427C700087D386 /* tinyobj.h */,
@@ -151,6 +157,15 @@
 			path = assets;
 			sourceTree = "<group>";
 		};
+		D4469CCD2357DB3A009E297F /* normal */ = {
+			isa = PBXGroup;
+			children = (
+				D4469CD02357DB97009E297F /* normal.fs.glsl */,
+				D4469CD12357DB97009E297F /* normal.vs.glsl */,
+			);
+			name = normal;
+			sourceTree = "<group>";
+		};
 		D46098242357C717005A7D48 /* skybox */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,21 +175,22 @@
 			name = skybox;
 			sourceTree = "<group>";
 		};
+		D48290912357DB0B00EFC074 /* basics */ = {
+			isa = PBXGroup;
+			children = (
+				D4EB31CD2340139F00CFF8AA /* basic.fs.glsl */,
+				D4EB31CC2340139C00CFF8AA /* basic.vs.glsl */,
+			);
+			name = basics;
+			sourceTree = "<group>";
+		};
 		D48E2760233ED64B007B8FB5 = {
 			isa = PBXGroup;
 			children = (
 				D48E276B233ED64B007B8FB5 /* CGraphics */,
-				D48E276A233ED64B007B8FB5 /* Products */,
 				D4D6F799233EE13900C4BE47 /* Frameworks */,
+				D4469CCC2357DB31009E297F /* CGraphics */,
 			);
-			sourceTree = "<group>";
-		};
-		D48E276A233ED64B007B8FB5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D48E2769233ED64B007B8FB5 /* CGraphics */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D48E276B233ED64B007B8FB5 /* CGraphics */ = {
@@ -220,7 +236,7 @@
 			);
 			name = CGraphics;
 			productName = CGraphics;
-			productReference = D48E2769233ED64B007B8FB5 /* CGraphics */;
+			productReference = D4469CCC2357DB31009E297F /* CGraphics */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -246,7 +262,7 @@
 				Base,
 			);
 			mainGroup = D48E2760233ED64B007B8FB5;
-			productRefGroup = D48E276A233ED64B007B8FB5 /* Products */;
+			productRefGroup = D48E2760233ED64B007B8FB5;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

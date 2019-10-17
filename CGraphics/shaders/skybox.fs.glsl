@@ -8,6 +8,6 @@ uniform sampler2D texture_sampler;
 out vec4 fragment_color;
 
 void main() {
-    vec3 pixel = texture(texture_sampler, vertex_uv).rgb + vec3(0,0,0);
+    vec3 pixel = texture(texture_sampler, vertex_uv).rgb;
     fragment_color = vec4(pixel, 1.0);
 }
