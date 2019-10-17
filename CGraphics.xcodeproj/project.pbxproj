@@ -51,7 +51,6 @@
 		D42901BB2357B48500413FFF /* skybox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skybox.png; sourceTree = "<group>"; };
 		D42B418623402F35005F6C76 /* shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shaders.h; sourceTree = "<group>"; };
 		D42B418723402F35005F6C76 /* shaders.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shaders.c; sourceTree = "<group>"; };
-		D42C682A23427C310087D386 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		D42C682B23427C700087D386 /* tinyobj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyobj.h; sourceTree = "<group>"; };
 		D42C682C23427F5E0087D386 /* loader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = loader.h; sourceTree = "<group>"; };
 		D42C682D23427F730087D386 /* loader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = loader.c; sourceTree = "<group>"; };
@@ -73,7 +72,8 @@
 		D4C4661723403C2C00165730 /* object.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = object.c; sourceTree = "<group>"; };
 		D4D6F79A233EE13900C4BE47 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		D4D9DD152357FFCE00290C11 /* shader_programs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_programs.h; sourceTree = "<group>"; };
-		D4DE05CF2356D19E00DADF43 /* skybox.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.obj; sourceTree = "<group>"; };
+		D4D9DD1A2358077A00290C11 /* skybox.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = skybox.obj; sourceTree = "<group>"; };
+		D4D9DD1B2358079300290C11 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
 		D4DE05D023578D4A00DADF43 /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		D4DE05D123578D4A00DADF43 /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
 		D4EB31CC2340139C00CFF8AA /* basic.vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = basic.vs.glsl; sourceTree = "<group>"; };
@@ -150,9 +150,9 @@
 		D42C682923427BEA0087D386 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				D4D9DD1B2358079300290C11 /* teapot.obj */,
+				D4D9DD1A2358077A00290C11 /* skybox.obj */,
 				D42901BA2357B48500413FFF /* textures */,
-				D4DE05CF2356D19E00DADF43 /* skybox.obj */,
-				D42C682A23427C310087D386 /* teapot.obj */,
 			);
 			path = assets;
 			sourceTree = "<group>";

@@ -19,13 +19,13 @@
 char* loadFile(char* path) {
     FILE* stream = fopen(path, "r");
     if (stream == NULL) {
-        fprintf(stderr, "File error: Failed to load shader: %s\n", path);
+        fprintf(stderr, "File error: Failed to load file: %s\n", path);
         return NULL;
     }
     fseek(stream, 0L, SEEK_END);
     size_t size = ftell(stream) + 1;
     if (size == 0) {
-        fprintf(stderr, "File warning: empty shader source file: %s\n", path);
+        fprintf(stderr, "File warning: empty source file: %s\n", path);
     }
     char* source = (char*)malloc(size * sizeof(char));
     rewind(stream);
