@@ -4,6 +4,7 @@ in vec3 vertex_normal;
 in vec2 vertex_uv;
 
 uniform sampler2D texture_sampler;
+uniform sampler2D environment_map;
 
 out vec4 fragment_color;
 

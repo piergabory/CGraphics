@@ -34,7 +34,9 @@ const vec3 ambient = vec3(0.839215686, 0.792156863, 0.690196078) * 0.1;
 uniform Material material;
 uniform Light lights[10];
 uniform int light_count;
+
 uniform sampler2D texture_sampler;
+uniform sampler2D environment_map;
 
 in vec3 vertex_position;
 in vec3 vertex_normal;
@@ -44,7 +46,7 @@ out vec4 fragment_color;
 
 void main() {
     vec3 phongs = vec3(0);
-    vec3 pixel = texture(texture_sampler, vertex_uv).rgb;
+    vec3 pixel = texture(texture_sampler, vertex_uv).rgb + texture(environment_map, vertex_normal.xy).rgb;
     for (int index = 0; index < 10 && index < light_count; index ++) {
         phongs += phong(lights[index], material, vertex_normal, vertex_position, pixel);
     }

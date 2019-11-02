@@ -106,6 +106,8 @@ void useMaterial(Object object) {
     glUniform1f(object.shader.uniform_material_specular, object.material.specular);
     glUniform1f(object.shader.uniform_material_diffuse, object.material.diffuse);
     glUniform3fv(object.shader.uniform_material_color, 1, object.material.color.v);
+
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, object.material.texture);
 }
 

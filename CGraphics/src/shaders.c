@@ -68,14 +68,11 @@ static void linkProgram(GLuint programId, Shader vertex_shader, Shader fragment_
 
 /// TODO: Doc
 static void mapUniforms(ShaderProgram* program) {
+    glUseProgram(program->id);
+
     program->uniform_model_view_projection_matrix = glGetUniformLocation(program->id, "model_view_projection_matrix_uniform");
     program->uniform_model_view_matrix =            glGetUniformLocation(program->id, "model_view_matrix_uniform");
     program->uniform_normal_matrix =                glGetUniformLocation(program->id, "normal_matrix_uniform");
-
-    glActiveTexture(GL_TEXTURE0);
-    program->uniform_material_texture = glGetUniformLocation(program->id, "texture_sampler");
-    glUniform1d(program->uniform_material_texture, 0);
-
 
     program->uniform_material_shine = glGetUniformLocation(program->id, "material.shine");
     program->uniform_material_specular = glGetUniformLocation(program->id, "material.specular");
@@ -85,6 +82,14 @@ static void mapUniforms(ShaderProgram* program) {
     program->uniform_lights_position = glGetUniformLocation(program->id, "lights[0].position");
     program->uniform_lights_color = glGetUniformLocation(program->id, "lights[0].color");
     program->uniform_light_count = glGetUniformLocation(program->id, "light_count");
+
+    glActiveTexture(GL_TEXTURE0);
+    GLuint texture = glGetUniformLocation(program->id, "texture_sampler");
+    glUniform1i(texture, TEXTURE_SAMPLER);
+
+    glActiveTexture(GL_TEXTURE1);
+    GLuint environment_map = glGetUniformLocation(program->id, "environment_map");
+    glUniform1i(environment_map, ENVIRONMENT_MAP_SAMPLER);
 }
 
 

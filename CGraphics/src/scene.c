@@ -13,11 +13,13 @@ Scene createScene() {
     newScene.root = NULL;
     newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90.0f), 1.0f, 1.0f, 100.0f);
     newScene.lights = NULL;
+    newScene.environment_map = loadTexture("assets/textures/skybox.png");
     return newScene;
 }
 
 void deleteScene(Scene newScene) {
     deleteInstance(newScene.root);
+    glDeleteTextures(1, &newScene.environment_map);
     for (size_t index = 0; index < newScene.light_count; index++) {
         free(newScene.lights[index]);
     }
@@ -70,9 +72,14 @@ void drawScene(Scene scene) {
     Instance* head = scene.root;
 
     while (head != NULL) {
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(ENVIRONMENT_MAP_SAMPLER, scene.environment_map);
+
         bindObject(*head->model);
         updateUniforms(head->model->shader, head->model_view, scene.camera);
         updateLights(head->model->shader, scene.lights, (GLsizei) scene.light_count);
+
+
         glDrawArrays(GL_TRIANGLES, 0, head->model->vertices_count);
         head = head->next;
     }

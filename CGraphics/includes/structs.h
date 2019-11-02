@@ -69,6 +69,7 @@ typedef struct Scene {
     Instance* root;
     GLKMatrix4 camera;
     Light **lights;
+    GLuint environment_map;
     GLKVector4 ambient;
     size_t light_count;
 } Scene;

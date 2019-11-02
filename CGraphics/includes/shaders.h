@@ -27,6 +27,12 @@ enum ShaderAttributes {
     UV_ATTRIBUTE_POSITION = 2
 };
 
+
+enum ShaderTextures {
+    TEXTURE_SAMPLER = 0,
+    ENVIRONMENT_MAP_SAMPLER = 1
+};
+
 /**
  * Shader Program
  *
