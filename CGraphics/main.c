@@ -5,7 +5,7 @@
 //  Created by Pierre Gabory on 27/09/2019.
 //  Copyright © 2019 piergabory. All rights reserved.
 //
-
+// yo dude
 #define CG_CONTEXT_SHOW_BACKTRACE
 #define GL_SILENCE_DEPRECATION
 
