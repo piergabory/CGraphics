@@ -11,15 +11,13 @@
 
 #include <unistd.h>
 
-
 #include "shader_programs.h"
 #include "window.h"
 #include "scene.h"
 
 
 // Define main function
-int main()
-{
+int main() {
     Window window = initContext();
     Scene scene = createScene();
 
@@ -28,7 +26,7 @@ int main()
     addLightSource(&scene, GLKVector3Make(0, 5, 0), GLKVector4Make(1.0, 1.0, 1.0, 1.0));
 
     Object skybox_object = importTexturedOBJ("assets/skybox.obj", "assets/textures/skybox.png", make_skybox_shader_program());
-    Object teapot_object = importTexturedOBJ("assets/teapot.obj", "assets/textures/null.png", make_basic_shader_program());
+    Object teapot_object = importTexturedOBJ("assets/teapot.obj", "assets/textures/skybox_test.png", make_basic_shader_program());
 
     Instance* skybox = addObjectToScene(&skybox_object, &scene);
     float skybox_scale = 60;
