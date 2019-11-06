@@ -17,6 +17,8 @@
 
 #include "structs.h"
 
-GLuint loadTexture(char *png_filename);
+GLuint loadTexture(char *png_filename, GLint type);
+
+GLuint loadCubeTexture(char **sides_filenames);
 
 #endif /* texture_h */

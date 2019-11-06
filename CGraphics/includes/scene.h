@@ -19,11 +19,11 @@ void deleteScene(Scene newScene);
 
 void addLightSource(Scene* scene, GLKVector3 position, GLKVector4 color);
 
-Instance* createInstance(Object* model);
+Mesh* createInstance(Geometry* model);
 
-void deleteInstance(Instance* instance);
+void deleteInstance(Mesh* instance);
 
-Instance* addObjectToScene(Object* model, Scene* scene);
+Mesh* addObjectToScene(Geometry* model, Scene* scene);
 
 void drawScene(Scene scene);
 

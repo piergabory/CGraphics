@@ -124,18 +124,53 @@ static int loadPNG(char *filename, size_t *outWidth, size_t *outHeight, int *out
    return 1;
 }
 
-GLuint loadTexture(char *png_filename) {
+GLuint loadTexture(char *png_filename, GLint type) {
     Image image;
     GLuint texture = 0;
 
     if (loadPNG(png_filename, &image.width, &image.height, &image.alpha, &image.bytes) == 1) {
         glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei) image.width, (GLsizei) image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bytes);
+        glBindTexture(type, texture);
+        glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D(type, 0, GL_RGBA, (GLsizei) image.width, (GLsizei) image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bytes);
     } else {
         printf("failed to bind texture to object: %s\n", png_filename);
+    }
+
+    return texture;
+}
+
+
+enum CubeSide {
+    TOP = 0, BOTTOM, LEFT, RIGHT, FRONT, BACK = 5
+};
+
+GLuint loadCubeTexture(char **sides_filenames) {
+    Image image;
+    GLuint texture = 0;
+    glGenTextures(1, &texture);
+    GLint type;
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, texture);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    for (enum CubeSide side = 0; side < 6; side++) {
+        switch (side) {
+            case TOP: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Y; break;
+            case BOTTOM: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y; break;
+            case RIGHT: type = GL_TEXTURE_CUBE_MAP_POSITIVE_X; break;
+            case LEFT: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_X; break;
+            case FRONT: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; break;
+            case BACK: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Z; break;
+        }
+
+        if (loadPNG(sides_filenames[side], &image.width, &image.height, &image.alpha, &image.bytes) == 1) {
+            glTexImage2D(type, 0, GL_RGBA, (GLsizei) image.width, (GLsizei) image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.bytes);
+        } else {
+            printf("failed to bind texture to object: %s\n", sides_filenames[side]);
+        }
     }
 
     return texture;

@@ -10,10 +10,19 @@
 
 Scene createScene() {
     Scene newScene;
+    char *environement_cubemap[6] = {
+        "assets/textures/skybox/bottom.png",
+        "assets/textures/skybox/top.png",
+        "assets/textures/skybox/right.png",
+        "assets/textures/skybox/left.png",
+        "assets/textures/skybox/front.png",
+        "assets/textures/skybox/back.png"
+    };
+
     newScene.root = NULL;
     newScene.camera = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90.0f), 1.0f, 1.0f, 100.0f);
     newScene.lights = NULL;
-    newScene.environment_map = loadTexture("assets/textures/skybox.png");
+    newScene.environment_map = loadCubeTexture(environement_cubemap);
     return newScene;
 }
 
@@ -35,8 +44,8 @@ void addLightSource(Scene* scene, GLKVector3 position, GLKVector4 color) {
     scene->lights[scene->light_count - 1] = newLight;
 }
 
-Instance* createInstance(Object* model) {
-    Instance* newInstance = malloc(sizeof(Instance));
+Mesh* createInstance(Geometry* model) {
+    Mesh* newInstance = malloc(sizeof(Mesh));
     if (!newInstance) {
         fprintf(stderr, "Malloc error.");
         return NULL;
@@ -49,19 +58,19 @@ Instance* createInstance(Object* model) {
     return newInstance;
 }
 
-void deleteInstance(Instance* instance) {
+void deleteInstance(Mesh* instance) {
     if (instance->next)
         deleteInstance(instance->next);
     free(instance);
 }
 
-Instance* addObjectToScene(Object* model, Scene* scene) {
+Mesh* addObjectToScene(Geometry* model, Scene* scene) {
     // try to allocate instance
-    Instance* newInstance = createInstance(model);
+    Mesh* newInstance = createInstance(model);
     if (!newInstance) return NULL;
 
     // push to the instance list on success
-    Instance* head = scene->root;
+    Mesh* head = scene->root;
     scene->root = newInstance;
     scene->root->next = head;
     
@@ -69,13 +78,13 @@ Instance* addObjectToScene(Object* model, Scene* scene) {
 }
 
 void drawScene(Scene scene) {
-    Instance* head = scene.root;
+    Mesh* head = scene.root;
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, scene.environment_map);
 
     while (head != NULL) {
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(ENVIRONMENT_MAP_SAMPLER, scene.environment_map);
-
         bindObject(*head->model);
+
         updateUniforms(head->model->shader, head->model_view, scene.camera);
         updateLights(head->model->shader, scene.lights, (GLsizei) scene.light_count);
 

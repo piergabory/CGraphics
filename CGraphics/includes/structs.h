@@ -43,20 +43,20 @@ typedef struct Material {
 } Material;
 
 
-typedef struct Object {
+typedef struct Geometry {
     GLuint vbo;
     GLuint vao;
     GLsizei vertices_count;
     ShaderProgram shader;
     Material material;
-} Object;
+} Geometry;
 
 
-typedef struct Instance {
-    Object* model;
+typedef struct Mesh {
+    Geometry* model;
+    struct Mesh* next;
     GLKMatrix4 model_view;
-    struct Instance* next;
-} Instance;
+} Mesh;
 
 
 typedef struct Light {
@@ -66,7 +66,7 @@ typedef struct Light {
 
 
 typedef struct Scene {
-    Instance* root;
+    Mesh* root;
     GLKMatrix4 camera;
     Light **lights;
     GLuint environment_map;

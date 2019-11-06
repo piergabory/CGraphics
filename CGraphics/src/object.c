@@ -11,7 +11,7 @@
 #define TINYOBJ_LOADER_C_IMPLEMENTATION
 #include "tinyobj.h"
 
-Object importOBJ(char* filepath, ShaderProgram program) {
+Geometry importOBJ(char* filepath, ShaderProgram program) {
     // Get obj source code
     char* obj_source = loadFile(filepath);
     size_t obj_source_length = strlen(obj_source);
@@ -58,7 +58,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     }
 
 
-    Object new_object;
+    Geometry new_object;
     new_object.vertices_count = 0;
 
     if (num_triangles > 0) {
@@ -86,9 +86,9 @@ Object importOBJ(char* filepath, ShaderProgram program) {
     tinyobj_materials_free(materials, material_count);
 
     Material mat = {
-        .shine = 32,
-        .specular = 0.9,
-        .diffuse = 0.1,
+        .shine = 200,
+        .specular = 0.99,
+        .diffuse = 0.01,
         .texture = 0
     };
 
@@ -101,7 +101,7 @@ Object importOBJ(char* filepath, ShaderProgram program) {
 
 
 
-void useMaterial(Object object) {
+void useMaterial(Geometry object) {
     glUniform1f(object.shader.uniform_material_shine, object.material.shine);
     glUniform1f(object.shader.uniform_material_specular, object.material.specular);
     glUniform1f(object.shader.uniform_material_diffuse, object.material.diffuse);
@@ -114,9 +114,9 @@ void useMaterial(Object object) {
 
 
 
-Object importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram program) {
-    Object new_object = importOBJ(filepath, program);
-    new_object.material.texture = loadTexture(texturepath);
+Geometry importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram program) {
+    Geometry new_object = importOBJ(filepath, program);
+    new_object.material.texture = loadTexture(texturepath, GL_TEXTURE_2D);
     return new_object;
 }
 
@@ -126,7 +126,7 @@ Object importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram progra
  * Draw Object
  * Renders the object.
  */
-void bindObject(Object object) {
+void bindObject(Geometry object) {
     glBindVertexArray(object.vao);
     glUseProgram(object.shader.id);
     useMaterial(object);
@@ -140,7 +140,7 @@ void bindObject(Object object) {
  *
  * @param object object to delete
  */
-void deleteObject(Object object) {
+void deleteObject(Geometry object) {
     glDeleteBuffers(1, &object.vbo);
     glDeleteBuffers(1, &object.vao);
     glDeleteTextures(1, &object.material.texture);

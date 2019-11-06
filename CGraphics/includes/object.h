@@ -19,15 +19,15 @@
 
 #include "texture.h"
 
-Object importOBJ(char* filepath, ShaderProgram program);
+Geometry importOBJ(char* filepath, ShaderProgram program);
 
-Object importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram program);
+Geometry importTexturedOBJ(char* filepath, char* texturepath, ShaderProgram program);
 
 /**
  * Draw Object
  * Renders the object.
  */
-void bindObject(Object object);
+void bindObject(Geometry object);
 
 /**
  * Delete Object
@@ -36,6 +36,6 @@ void bindObject(Object object);
  *
  * @param object object to delete
  */
-void deleteObject(Object object);
+void deleteObject(Geometry object);
 
 #endif /* mesh_h */
