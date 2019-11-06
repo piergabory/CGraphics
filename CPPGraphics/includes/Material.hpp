@@ -20,23 +20,25 @@ namespace Gabengine {
 class Material {
 public:
     Material(const std::string &vertexShader, const std::string &fragmentShader);
-protected:
+    void setProjectionMatrices(const GLKMatrix4 &modelViewProjection, const GLKMatrix4 &modelView, const GLKMatrix4 &normal);
     inline GLuint programID() const { return m_programID; }
 private:
     GLuint m_programID;
-};
-
-class BasicMaterial: Material {
-public:
-    BasicMaterial();
-private:
+    
     GLuint modelViewProjectionMatrixUniform;
     GLuint modelViewMatrixUniform;
     GLuint normalMatrixUniform;
 };
 
-class PhongMaterial: Material {
-    private:
+class BasicMaterial: public Material {
+public:
+    BasicMaterial();
+private:
+    GLKVector3 color = GLKVector3Make(1, 0, 0);
+};
+
+class PhongMaterial: public Material {
+private:
     float shine;
     float specular;
     float diffuse;

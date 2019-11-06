@@ -14,7 +14,7 @@ out vec2 vertex_uv;
 
 void main() {
     vertex_position = (model_view_matrix_uniform * vec4(vertex_position_attribute, 1)).xyz;
-    vertex_normal = vertex_normal_attribute; //(normal_matrix_uniform * vec4(vertex_normal_attribute, 1)).xyz;
+    vertex_normal = (normal_matrix_uniform * vec4(vertex_normal_attribute, 1)).xyz;;
     vertex_uv = vertex_uv_attribute;
 
     gl_Position = model_view_projection_matrix_uniform * vec4(vertex_position_attribute, 1);

@@ -10,12 +10,20 @@
 
 namespace Gabengine {
 
-Object::Object(Object &copy) : m_modelViewMatrix(copy.m_modelViewMatrix)
-{}
+Object::Object() {
+    modelViewStates.push(GLKMatrix4Identity);
+}
 
-void Object::add(Object &children) {
-    std::unique_ptr<Object> unique_reference = std::make_unique<Object>(children);
-    childrens.push_back(std::move(unique_reference));
+Object::~Object() {
+    while (!childrens().empty()) {
+        Object* topChildren = childrens().back();
+        childrens().pop_back();
+        delete topChildren;
+    }
+}
+
+void Object::add(Object *children) {
+    m_childrens.push_back(children);
 }
 
 }

@@ -15,6 +15,8 @@
 
 #include <GL/glew.h>
 
+#include "LoadFile.hpp"
+
 namespace Gabengine {
 
 class Shader {
@@ -30,8 +32,6 @@ public:
 
 private:
     GLuint m_identifier;
-
-    static std::string loadFile(std::string path);
 
     static std::map<std::string, Shader> vertexShaders;
     static std::map<std::string, Shader> fragmentShaders;

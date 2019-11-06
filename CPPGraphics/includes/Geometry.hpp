@@ -22,6 +22,10 @@ struct Vertex {
     GLKVector3 position;
     GLKVector3 normal;
     GLKVector2 uv;
+
+    Vertex( GLKVector3 position, GLKVector3 normal, GLKVector2 uv ):
+    position(position), normal(normal), uv(uv)
+    {}
 };
 
 
@@ -30,17 +34,18 @@ public:
     inline GLuint vertexArray() { return m_vao; }
     inline GLuint vertexCount() { return m_vertexCount; }
 
+    inline void bindGeometry() { glBindVertexArray(m_vao); }
 
+    // Constructor / Destructor
+    Geometry(const std::vector<Vertex> &vertices);
+    Geometry(const GLfloat *data, const GLsizei vertex_count);
+    ~Geometry();
 private:
     // Properties
     GLuint m_vbo = 0;
     GLuint m_vao = 0;
     GLsizei m_vertexCount;
-
-    // Constructor / Destructor
-    Geometry(std::vector<Vertex> &vertices);
-    ~Geometry();
-
+    
     enum VertexAttributes {
         Position = 0,
         Normal = 1,

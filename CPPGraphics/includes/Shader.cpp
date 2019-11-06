@@ -27,35 +27,12 @@ const GLuint Shader::getFragment(std::string shader) {
     return fragmentShaders.at(shader).m_identifier;
 }
 
-
-std::string Shader::loadFile(std::string path) {
-    FILE* stream = std::fopen(path.c_str(), "r");
-    if (stream == nullptr) {
-        std::cerr << "File error: Failed to load file:" << path << "\n";
-        return "";
-    }
-    fseek(stream, 0L, SEEK_END);
-    size_t size = ftell(stream) + 1;
-    if (size == 0) {
-        std::cerr << "File warning: empty source file::" << path << "\n";
-        return "";
-    }
-    char* source = new char[size];
-    rewind(stream);
-    fread(source, size, sizeof(char), stream);
-    source[size - 1] = '\0';
-
-    std::string string(source);
-    delete[] source;
-
-    return string;
-}
-
 Shader::Shader(std::string file, GLenum type) :
     m_identifier(glCreateShader(type))
 {
-    std::string source = loadFile(file);
-    glShaderSource(m_identifier, 1, (const GLchar**)source.c_str(), nullptr);
+    std::string source = Loaders::loadFile(file);
+    GLchar* cstring = (GLchar*)source.c_str();
+    glShaderSource(m_identifier, 1, &cstring, nullptr);
     glCompileShader(m_identifier);
 
     GLint status;

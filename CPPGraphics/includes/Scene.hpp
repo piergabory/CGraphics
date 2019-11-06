@@ -9,12 +9,26 @@
 #ifndef Scene_hpp
 #define Scene_hpp
 
+#include <stack>
+//#include <vector>
+#include <typeinfo>
+
+#include <GL/glew.h>
+#include <GLKit/GLKMath.h>
+
 #include "Object.hpp"
+#include "Mesh.hpp"
 
 namespace Gabengine {
 
-class Scene : Object {
+class Scene : public Object {
+public:
+    Scene();
 
+    void render();
+
+private:
+    GLKMatrix4 camera;
 };
 
 }

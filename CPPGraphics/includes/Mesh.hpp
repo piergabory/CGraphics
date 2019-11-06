@@ -16,10 +16,14 @@
 namespace Gabengine {
 
 class Mesh : public Object {
+public:
+    void render(GLKMatrix4 &camera);
+    Mesh(Geometry *geometry, Material *material);
+    ~Mesh();
 
 private:
-    Geometry geometry;
-    Material material;
+    Geometry* geometry;
+    Material* material;
 };
 
 }

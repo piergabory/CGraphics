@@ -10,24 +10,44 @@
 #define Object_hpp
 
 #include <vector>
-#include <memory>
+#include <stack>
 #include <GLKit/GLKMath.h>
 
 namespace Gabengine {
 
 class Object {
 public:
-    void add(Object &children);
+    void add(Object *children);
 
-    Object() = default;
+    Object();
 
-    // copy constructor
-    Object(Object &copy);
+    virtual ~Object();
+
+    inline void translate(float x, float y, float z) { modelViewWriteRef() = GLKMatrix4Translate(modelView(), x, y, z); }
+
+    inline void scale(float x, float y, float z) { modelViewWriteRef() = GLKMatrix4Scale(modelView(), x, y, z); }
+
+    inline void scale(float x) { scale(x,x,x); }
+
+    inline void rotate(float degrees, float x, float y, float z) {
+        modelViewWriteRef() = GLKMatrix4Rotate(modelView(), GLKMathDegreesToRadians(degrees), x, y, z);
+    }
+
+    inline void save() { modelViewStates.push(modelView()); }
+
+    inline void restore() { modelViewStates.pop(); }
+
+    // public read
+    inline const GLKMatrix4& modelView() const { return modelViewStates.top(); }
+
+    inline std::vector<Object*> childrens() const { return m_childrens; }
 
 private:
-    std::vector<std::unique_ptr<Object>> childrens = {};
+    // private write
+    inline GLKMatrix4& modelViewWriteRef() { return modelViewStates.top(); }
 
-    GLKMatrix4 m_modelViewMatrix = GLKMatrix4Identity;
+    std::stack<GLKMatrix4> modelViewStates;
+    std::vector<Object*> m_childrens = {};
 };
 
 }

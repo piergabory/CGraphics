@@ -11,8 +11,8 @@
 Scene createScene() {
     Scene newScene;
     char *environement_cubemap[6] = {
-        "assets/textures/skybox/bottom.png",
         "assets/textures/skybox/top.png",
+        "assets/textures/skybox/bottom.png",
         "assets/textures/skybox/right.png",
         "assets/textures/skybox/left.png",
         "assets/textures/skybox/front.png",

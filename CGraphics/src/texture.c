@@ -158,12 +158,12 @@ GLuint loadCubeTexture(char **sides_filenames) {
 
     for (enum CubeSide side = 0; side < 6; side++) {
         switch (side) {
-            case TOP: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Y; break;
-            case BOTTOM: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y; break;
-            case RIGHT: type = GL_TEXTURE_CUBE_MAP_POSITIVE_X; break;
-            case LEFT: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_X; break;
-            case FRONT: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; break;
-            case BACK: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Z; break;
+            case TOP: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Y; break;
+            case BOTTOM: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Y; break;
+            case RIGHT: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_X; break;
+            case LEFT: type = GL_TEXTURE_CUBE_MAP_POSITIVE_X; break;
+            case FRONT: type = GL_TEXTURE_CUBE_MAP_POSITIVE_Z; break;
+            case BACK: type = GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; break;
         }
 
         if (loadPNG(sides_filenames[side], &image.width, &image.height, &image.alpha, &image.bytes) == 1) {
